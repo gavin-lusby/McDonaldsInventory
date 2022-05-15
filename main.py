@@ -4,7 +4,7 @@ Date: May 12-June 10, 2022
 Purpose: Create a comprehensive inventory software for McDonald's employees and managers to use
 
 GENERAL PROGRAMMING NOTES
-- subdivs.csv is no-edit unless adding new items to inventory
+- subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
 """
 
 
