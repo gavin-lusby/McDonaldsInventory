@@ -1,5 +1,5 @@
 # Starting menu
-def menu():
+def start_menu():
   # Imports list of valid accounts
   from main import validAccs
   acc = ""
