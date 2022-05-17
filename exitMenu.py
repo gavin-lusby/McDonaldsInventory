@@ -1,5 +1,5 @@
 # Exit statements
 def exit_menu():
-  print("Goodbye!")
+  print("*Plays McDonald's jingle*\nGoodbye!")
   quit()
 # Should return nothing, only exits program
