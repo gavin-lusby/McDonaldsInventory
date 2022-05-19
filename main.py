@@ -23,28 +23,28 @@ def start_menu():
     acc = ""
 
     # Checks to see if access code is valid
-    while acc not in validAccs:
+    while acc.lower() not in validAccs:
         print(menus["header"])
-        acc = input("Please enter your access code, or type exit to end program: ")
+        print(menus["funclist"])
+        acc = input("Please enter your access code correctly or type exit to end program: ")
 
         # Exits program if exit option chosen
-        if acc == "exit":
+        if acc.lower() == "exit":
             exit_menu()
 
         # Calls on appropriate function for user's desired action
-        act = input("SELECT AN ACTION:")
-        if act == 1:
-            new_shipment_up()
-        elif act == 2:
-            recalib_inventory()
-        elif act == 3:
-            # check_stock()
-            pass
-
+    act = input("SELECT AN ACTION: ")
+    if act == 1:
+        new_shipment_up()
+    elif act == 2:
+        recalib_inventory()
+    elif act == 3:
+        check_stock()
 
 # Should return nothing
 
 
+      
 # Only runs main if main is being run directly
 if __name__ == "__main__":
     import csv
@@ -67,12 +67,13 @@ if __name__ == "__main__":
     with open(os.path.join(sys.path[0], "menus.txt"), 'r') as f:
         raw_menus = []
 
-        """Python automatically assumes we dont want chars like \n to actually be a newline character,
-        so it automatically adds an extra backslash. This removes that since when we have "\n" in menus
-        we actually want a new line but we cant just press enter because each "menu" should only take up one
-        line"""
+        """Python automatically assumes we dont want chars like \n
+        to actually be a newline character, so it automatically adds
+        an extra backslash. This removes that since when we have "\n"
+        in menus we actually want a new line but we cant just press
+        enter because each "menu" should only take up one line"""
         for menu in f.read().splitlines():
-            raw_menus.append(menu.replace('\\n', '\n'))
+          raw_menus.append(menu.replace('\\n', '\n'))
     menus = {"header": raw_menus[0], "funclist": raw_menus[1]}
     # Run program
     start_menu()

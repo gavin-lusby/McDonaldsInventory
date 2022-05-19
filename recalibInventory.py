@@ -1,10 +1,18 @@
 # Employee update for taking items from shelf
 def recalib_inventory():
-  """
-  item = input("Item(s) taken, each item separated by a comma: ")
-  amount = input("Amount of item(s) taken, separated: ")
-  
+  # Imports variables from main.py
+  global acc, units_by_product
+
+  print(f"Welcome, {acc}")
+
+  request = ""
+  updates = []
+
+  # Takes requests from employee user
+  while request.lower() != "exit":
+    request = input("Enter item taken, or type exit to finish updating: ")
+    updates.append(request)
+
   units_by_product
-  """
-  pass
+
 # Should return nothing (takes inputs only)
