@@ -26,7 +26,7 @@ def start_menu():
     while acc.lower() not in validAccs:
         print(menus["header"])
         print(menus["funclist"])
-        acc = input("Please enter your access code correctly or type exit to end program: ")
+        acc = input("Please enter your access code correctly: ")
 
         # Exits program if exit option chosen
         if acc.lower() == "exit":
@@ -34,12 +34,14 @@ def start_menu():
 
         # Calls on appropriate function for user's desired action
     act = input("SELECT AN ACTION: ")
-    if act == 1:
+    if act == "1":
         new_shipment_up()
-    elif act == 2:
+    elif act == "2":
         recalib_inventory()
-    elif act == 3:
+    elif act == "3":
         check_stock()
+    elif act == "exit":
+        exit_menu()
 
 # Should return nothing
 
