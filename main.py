@@ -12,7 +12,7 @@ Creates a dict for the sake of converting and storing unit types. First item in
 each line(names of items) of csv becomes the key, and the rest of the items become
 a list that is stored as the value associated with that key. The number values get converted from string to int
 """
-
+# not cool comment
 
 # Starting menu
 # Runs for entire program; main piece of program
