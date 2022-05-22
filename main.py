@@ -12,8 +12,7 @@ Creates a dict for the sake of converting and storing unit types. First item in
 each line(names of items) of csv becomes the key, and the rest of the items become
 a list that is stored as the value associated with that key. The number values get converted from string to int
 """
-#cool comment
-# added another cool comment
+
 
 # Starting menu
 # Runs for entire program; main piece of program
@@ -44,10 +43,10 @@ def start_menu():
     elif act == "exit":
         exit_menu()
 
+
 # Should return nothing
 
 
-      
 # Only runs main if main is being run directly
 if __name__ == "__main__":
     import csv
@@ -76,7 +75,7 @@ if __name__ == "__main__":
         in menus we actually want a new line but we cant just press
         enter because each "menu" should only take up one line"""
         for menu in f.read().splitlines():
-          raw_menus.append(menu.replace('\\n', '\n'))
+            raw_menus.append(menu.replace('\\n', '\n'))
     menus = {"header": raw_menus[0], "funclist": raw_menus[1]}
     # Run program
     start_menu()
