@@ -13,7 +13,6 @@ each line(names of items) of csv becomes the key, and the rest of the items beco
 a list that is stored as the value associated with that key. The number values get converted from string to int
 """
 
-
 # Starting menu
 # Runs for entire program; main piece of program
 
