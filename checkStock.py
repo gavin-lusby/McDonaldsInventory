@@ -1,4 +1,7 @@
 # Manager or employees check stock (how much has been used, how much needs to be ordered)
+
+# Edited by Isaac (2022-5-23)
+
 def DD_find (DD, item):
   for l in range(len(DD)):
     if DD[l] == item:
