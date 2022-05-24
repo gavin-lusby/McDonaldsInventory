@@ -23,7 +23,7 @@ def start_menu():
 
     # Checks to see if access code is valid
     while acc.lower() not in validAccs:
-        print(menus["header"])
+        reset_screen(False)
         print(menus["funclist"])
         acc = input("Please enter your access code correctly: ")
 
@@ -33,12 +33,30 @@ def start_menu():
 
         # Calls on appropriate function for user's desired action
     act = input("SELECT AN ACTION: ")
+
+  
     if act == "1":
         new_shipment_up()
+
+      
     elif act == "2":
-        recalib_inventory()
+      updated_inv = recalib_inventory(acc, units_by_product)
+      if updated_inv != units_by_product:
+        with open(os.path.join(sys.path[0],"myFile.csv"), 'w',newline = "") as f:
+          writer = csv.writer(f)
+          updated_inv_to_list = []
+          # Iterates through keys of updated_inv and converts them back to list form
+          # in order to be usable by writerows function
+          for item in list(updated_inv):
+            updated_inv_to_list.append([item] + updated_inv[item])
+            writer.writerows(updated_inv_to_list)
+
+            
     elif act == "3":
-        check_stock()
+        #check_stock('all')
+        print("do not error")
+
+      
     elif act == "exit":
         exit_menu()
 
@@ -57,6 +75,7 @@ if __name__ == "__main__":
     from recalibInventory import recalib_inventory
     from checkStock import check_stock
     from exitMenu import exit_menu
+    from resetScreen import reset_screen
 
     # Importing from inventory.csv to create list of inventory units_by_product
     units_by_product = {}
