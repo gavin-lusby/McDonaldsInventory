@@ -2,6 +2,7 @@
 
 from resetScreen import reset_screen
 
+
 def new_shipment_up():
-  pass
+    pass
 # Returns nothing, edits inventory.csv

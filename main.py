@@ -13,6 +13,7 @@ each line(names of items) of csv becomes the key, and the rest of the items beco
 a list that is stored as the value associated with that key. The number values get converted from string to int
 """
 
+
 # Starting menu
 # Runs for entire program; main piece of program
 
@@ -34,29 +35,22 @@ def start_menu():
         # Calls on appropriate function for user's desired action
     act = input("SELECT AN ACTION: ")
 
-  
     if act == "1":
         new_shipment_up()
-
-      
     elif act == "2":
-      updated_inv = recalib_inventory(acc, units_by_product)
-      if updated_inv != units_by_product:
-        with open(os.path.join(sys.path[0],"myFile.csv"), 'w',newline = "") as f:
-          writer = csv.writer(f)
-          updated_inv_to_list = []
-          # Iterates through keys of updated_inv and converts them back to list form
-          # in order to be usable by writerows function
-          for item in list(updated_inv):
-            updated_inv_to_list.append([item] + updated_inv[item])
-            writer.writerows(updated_inv_to_list)
-
-            
+        updated_inv = recalib_inventory(acc, units_by_product)
+        if updated_inv != units_by_product:
+            with open(os.path.join(sys.path[0], "myFile.csv"), 'w', newline="") as f:
+                writer = csv.writer(f)
+                updated_inv_to_list = []
+                # Iterates through keys of updated_inv and converts them back to list form
+                # in order to be usable by writerows function
+                for item in list(updated_inv):
+                    updated_inv_to_list.append([item] + updated_inv[item])
+                    writer.writerows(updated_inv_to_list)
     elif act == "3":
-        #check_stock('all')
+        # check_stock('all')
         print("do not error")
-
-      
     elif act == "exit":
         exit_menu()
 
@@ -87,7 +81,7 @@ if __name__ == "__main__":
     with open(os.path.join(sys.path[0], "menus.txt"), 'r') as f:
         raw_menus = []
 
-        """Python automatically assumes we dont want chars like \n
+        """Python automatically assumes we don't want chars like \n
         to actually be a newline character, so it automatically adds
         an extra backslash. This removes that since when we have "\n"
         in menus we actually want a new line but we cant just press
