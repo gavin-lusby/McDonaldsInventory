@@ -70,13 +70,10 @@ if __name__ == "__main__":
     from checkStock import check_stock
     from exitMenu import exit_menu
     from resetScreen import reset_screen
-
+    import csvOperations
+    print(csvOperations.getInv())
     # Importing from inventory.csv to create list of inventory units_by_product
-    units_by_product = {}
-    with open(os.path.join(sys.path[0], "subdivs.csv"), 'r') as f:
-        reader = csv.reader(f)
-        for product in list(reader):
-            units_by_product[product[0]] = [int(product[1]), int(product[2])] + product[3:]
+
 
     with open(os.path.join(sys.path[0], "menus.txt"), 'r') as f:
         raw_menus = []

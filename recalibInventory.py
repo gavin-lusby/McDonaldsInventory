@@ -8,7 +8,7 @@ from resetScreen import reset_screen
 
 def recalib_inventory(acc, curr_inv):
     # Check if necessary?
-    reset_screen()
+    reset_screen(True)
 
     print(f"Welcome, {acc}")
 
@@ -35,7 +35,7 @@ def recalib_inventory(acc, curr_inv):
             # In the real world, input would be done via keypad so possible input is limited to exit or an integer.
             # We are not accounting for if the user types something like "hello", which is possible in-console but
             # not in a real-world scenario
-            item_container_value = input(f"Enter the amount of {item_name[2]} of {item_name} taken as a number: ")
+            item_container_value = input(f"Enter the amount of {item_name[2]} {item_name} taken as a number: ")
             if item_container_value == "exit":
                 save_bool = input(
                     "Do you want to save changes? (this particular item will not be changed regardless since you have "
