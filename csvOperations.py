@@ -26,7 +26,7 @@ def getInv():
 def setInv(updated_inv):
   # Checks if changes would be redundant before making them
   if updated_inv != getInv(): 
-    with open(ospath.join(syspath[0], "myFile.csv"), 'w', newline="") as f:
+    with open(ospath.join(syspath[0], "inventory.csv"), 'w', newline="") as f:
       writer = csv.writer(f)
       temp_inv_as_list = []
       # Converts dictionary called inv into list of all of its keys

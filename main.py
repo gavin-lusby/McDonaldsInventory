@@ -19,19 +19,33 @@ a list that is stored as the value associated with that key. The number values g
 
 def start_menu():
     # Imports list of valid access accounts
-    validAccs = ["manager123", "employee1"]
-    acc = ""
+    validAccs = ["manager123","manager321" "employee1", "employee2","employee3"]
 
-    # Checks to see if access code is valid
-    while acc.lower() not in validAccs:
+    # Clear screen, ask for code
+    reset_screen(False)
+    print(menus["funclist"])
+    acc = input("Please enter your access code correctly: ").lower()
+
+    # Keep looping till code is invalid, or "exit"
+    while acc not in validAccs:
+        # Exits program if exit option chosen
+        if acc == "exit":
+            exit_menu()
         reset_screen(False)
         print(menus["funclist"])
-        acc = input("Please enter your access code correctly: ")
+        print("Invalid code, please try again.")
+        acc = input("Please enter your access code correctly: ").lower()
 
-        # Exits program if exit option chosen
-        if acc.lower() == "exit":
-            exit_menu()
+        
+        
+        reset_screen(False)
+        print(menus["funclist"])
+        print("Invalid code, try again")
 
+    # Clears the screen to prevent access codes from being seen by other users (privacy concern)
+    reset_screen(False)
+    print(menus["funclist"])
+  
         # Calls on appropriate function for user's desired action
     act = input("SELECT AN ACTION: ")
 
@@ -58,7 +72,6 @@ if __name__ == "__main__":
     from exitMenu import exit_menu
     from resetScreen import reset_screen
     import csvOperations
-    print(csvOperations.UBP)
     # Importing from inventory.csv to create list of inventory units_by_product
 
 
