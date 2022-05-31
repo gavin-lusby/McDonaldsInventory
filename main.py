@@ -18,7 +18,7 @@ a list that is stored as the value associated with that key. The number values g
 # Runs for entire program; main piece of program
 
 def start_menu():
-    # Imports list of valid accounts
+    # Imports list of valid access accounts
     validAccs = ["manager123", "employee1"]
     acc = ""
 
@@ -38,23 +38,11 @@ def start_menu():
     if act == "1":
         new_shipment_up()
     elif act == "2":
-        updated_inv = recalib_inventory(acc, units_by_product)
-        if updated_inv != units_by_product:
-            with open(os.path.join(sys.path[0], "myFile.csv"), 'w', newline="") as f:
-                writer = csv.writer(f)
-                updated_inv_to_list = []
-                # Iterates through keys of updated_inv and converts them back to list form
-                # in order to be usable by writerows function
-                for item in list(updated_inv):
-                    updated_inv_to_list.append([item] + updated_inv[item])
-                    writer.writerows(updated_inv_to_list)
+        csvOperations.setInv(recalib_inventory(acc))
     elif act == "3":
-        check_stock(units_by_product)
+        check_stock()
     elif act == "exit":
         exit_menu()
-
-
-# Should return nothing
 
 
 # Only runs main if main is being run directly
@@ -70,7 +58,7 @@ if __name__ == "__main__":
     from exitMenu import exit_menu
     from resetScreen import reset_screen
     import csvOperations
-    print(csvOperations.getInv())
+    print(csvOperations.UBP)
     # Importing from inventory.csv to create list of inventory units_by_product
 
 

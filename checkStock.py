@@ -19,8 +19,9 @@ def printout(stock, subdivs, item):
     sub2 = stock[item][1] % subdivs[item][2] # Number of remaining uses
     print(f"There are {sub1} {subdivs[item][3]} and {sub2} {subdivs[item][4]} of {subdivs[item][0]} ({stock[item][1]} uses).")
     
-def check_stock(subdivs):
+def check_stock():
     stock = csvOperations.getInv()  
+    subdivs = csvOperations.UBP
     reset_screen(True)
 
     search = check(subdivs)
@@ -30,11 +31,11 @@ def check_stock(subdivs):
             printout(stock, subdivs, a)
 
     elif search == 'exit':
-        reset_scree()
+        reset_screen(True)
         pass
 
     else: # specific item
         printout(stock, subdivs, search)
 
     pass
-# Should return nothing(prints current stock, may return current stock in later versions)
+# Should return nothing (prints current stock, may return current stock in later versions)
