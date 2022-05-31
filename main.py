@@ -45,18 +45,26 @@ def start_menu():
     # Clears the screen to prevent access codes from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
-  
-        # Calls on appropriate function for user's desired action
-    act = input("SELECT AN ACTION: ")
 
-    if act == "1":
-        new_shipment_up()
-    elif act == "2":
-        csvOperations.setInv(recalib_inventory(acc))
-    elif act == "3":
-        check_stock()
-    elif act == "exit":
-        exit_menu()
+        # Calls on appropriate function for user's desired action
+
+    while True:
+        act = input("SELECT AN ACTION: ")
+        act_valid = True
+        if act == "1":
+            new_shipment_up()
+        elif act == "2":
+            csvOperations.setInv(recalib_inventory(acc))
+        elif act == "3":
+            check_stock()
+        elif act == "exit":
+            exit_menu()
+        else:
+            act_valid = False
+        reset_screen(False)
+        print(menus["funclist"])
+        if not act_valid:
+            print("Invalid action, try again")
 
 
 # Only runs main if main is being run directly
