@@ -52,7 +52,7 @@ def start_menu():
         if act == "1":
             new_shipment_up()
         elif act == "2":
-            csvOperations.setInv(recalib_inventory(acc))
+            csvo.setInv(recalib_inventory(acc))
         elif act == "3":
             check_stock()
         elif act == "exit":
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     from checkStock import check_stock
     from exitMenu import exit_menu
     from resetScreen import reset_screen
-    import csvOperations
+    import csvo
 
     # Importing from inventory.csv to create list of inventory units_by_product
 

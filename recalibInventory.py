@@ -7,7 +7,7 @@
 # Edited by Katie, Gavin (2022-05-31)
 
 from resetScreen import reset_screen
-import csvOperations
+import csvo
 
 
 # Check if the user has chosen to save (returns True) or not (returns False)
@@ -27,7 +27,7 @@ def recalib_inventory(acc):
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {acc}")
 
-    curr_inv = csvOperations.getInv()  # Fetches current inventory
+    curr_inv = csvo.getInv()  # Fetches current inventory
     new_inv = dict(curr_inv)  # Creates copy of curr_inv to be edited as each
     # product is recalibrated
     # Update curr_inv = new_inv if user saves changes
@@ -43,7 +43,7 @@ def recalib_inventory(acc):
         # If the item mentioned is in the inventory, program asks user how much of the item they've taken off the
         # inventory shelves
         if item_name in curr_inv:
-            item_con_amount = int(input(f"Enter the amount of {csvOperations.UBP[item_name][2]} taken for this item: "))
+            item_con_amount = int(input(f"Enter the amount of {csvo.UBP[item_name][2]} taken for this item: "))
             if item_con_amount == "exit":
                 if checkIfSave:
                     return new_inv
@@ -51,14 +51,14 @@ def recalib_inventory(acc):
                     return curr_inv
             # For now, we are assuming that the user will only enter a valid integer, since in real life they would
             # have a keypad and only be able to enter integers
-            item_grp_amount = int(input(f"Enter the amount of {csvOperations.UBP[item_name][3]} taken for this item: "))
+            item_grp_amount = int(input(f"Enter the amount of {csvo.UBP[item_name][3]} taken for this item: "))
             if item_grp_amount == "exit":
                 if checkIfSave:
                     return new_inv
                 else:
                     return curr_inv
 
-            new_inv[item_name] = csvOperations.conToGrp(item_name, item_con_amount)[0] + item_grp_amount
+            new_inv[item_name] = csvo.conToGrp(item_name, item_con_amount)[0] + item_grp_amount
 
         else:  # If the user does not choose to exit entering items, and the item name isn't found in curr_inv (which
             # also doubles as a list of every valid item name), the following error message prints and the loop

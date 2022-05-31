@@ -1,7 +1,7 @@
 # Manager manual update inventory function (includes new shipments and recalibrating total product stock)
 
 from resetScreen import reset_screen
-import csvOperations
+import csvo
 
 
 def print_inv(inv):
@@ -12,7 +12,7 @@ def print_inv(inv):
 
 def new_shipment_up():
     while True:
-        inv = csvOperations.getInv()
+        inv = csvo.getInv()
         print_inv(inv)
 
     pass

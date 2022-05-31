@@ -1,6 +1,6 @@
 # Manager or employees check stock (how much has been used, how much needs to be ordered)
 from resetScreen import reset_screen
-import csvOperations
+import csvo
 
 
 # Edited by Isaac (2022-05-23)
@@ -16,30 +16,30 @@ def check(Dict):  # Checks if input is valid
     return item
 
 
-def printout(stock, subdivs, item):
-    sub1 = stock[item][1] // subdivs[item][2]  # Number of boxes
-    sub2 = stock[item][1] % subdivs[item][2]  # Number of remaining uses
+def printout(curr_inv, subdivs, item):
+    sub1 = curr_inv[item][1] // subdivs[item][2]  # Number of boxes
+    sub2 = curr_inv[item][1] % subdivs[item][2]  # Number of remaining uses
     print(
-        f"There are {sub1} {subdivs[item][3]} and {sub2} {subdivs[item][4]} of {subdivs[item][0]} ({stock[item][1]} uses).")
+        f"There are {sub1} {subdivs[item][3]} and {sub2} {subdivs[item][4]} of {subdivs[item][0]} ({curr_inv[item][1]} uses).")
 
 
 def check_stock():
-    stock = csvOperations.getInv()
-    subdivs = csvOperations.UBP
+    curr_inv = csvo.getInv()
+    subdivs = csvo.UBP  # Fetches subdivision table to convert units with
     reset_screen(True)
 
     search = check(subdivs)
 
     if search == "all":  # if user wants to see all
         for a in subdivs:
-            printout(stock, subdivs, a)
+            printout(curr_inv, subdivs, a)
 
     elif search == 'exit':
         reset_screen(True)
         pass
 
     else:  # specific item
-        printout(stock, subdivs, search)
+        printout(curr_inv, subdivs, search)
 
     pass
-# Should return nothing (prints current stock, may return current stock in later versions)
+# Should return nothing (prints current curr_inv, may return current curr_inv in later versions)
