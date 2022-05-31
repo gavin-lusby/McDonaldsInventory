@@ -2,8 +2,8 @@
 from resetScreen import reset_screen
 import csvOperations
 
-# Edited by Isaac (2022-5-23)
-# Edited by Isaac (2022-5-31) Officially works with dictionary and clean up
+# Edited by Isaac (2022-05-23)
+# Edited by Isaac (2022-05-31) Officially works with dictionary and clean up
 
 def check(Dict): # Checks if input is valid
     check = input("What item would you like to check: ").lower()
