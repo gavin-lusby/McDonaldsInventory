@@ -46,5 +46,6 @@ def conToUse(product_name, cons):
 
 
 # returns num of groups of product, and what a group is called
+# Example input: ("nuggets", 10), example output : [100, "bag(s)"]
 def conToGrp(product_name, cons):
     return [cons * UBP[product_name][0], UBP[product_name][3]]

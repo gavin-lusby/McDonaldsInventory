@@ -7,7 +7,12 @@
 from resetScreen import reset_screen
 
 def recalib_inventory(acc, curr_inv):
-    # Check if necessary?
+    reset_screen(True) # reset's screen with return to menu suggestion
+    print(f"Welcome, {acc}")
+
+
+  
+"""    # Check if necessary?
     reset_screen(True)
 
     print(f"Welcome, {acc}")
@@ -64,4 +69,4 @@ def recalib_inventory(acc, curr_inv):
         # updates.append(requests)
 
 # TO FIGURE OUT:
-# - Make save_bool usage more efficient (just use it once, change if statements' conditions)
+# - Make save_bool usage more efficient (just use it once, change if statements' conditions)"""
