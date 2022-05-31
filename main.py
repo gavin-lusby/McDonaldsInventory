@@ -48,9 +48,8 @@ def start_menu():
                 for item in list(updated_inv):
                     updated_inv_to_list.append([item] + updated_inv[item])
                     writer.writerows(updated_inv_to_list)
-    elif act == "3":
-        # check_stock('all')
-        print("do not error")
+    #elif act == "3":
+        #check_stock()
     elif act == "exit":
         exit_menu()
 

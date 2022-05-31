@@ -27,7 +27,7 @@ def useToGrp(product_name, uses):
 
 # returns num of containers of product, and what a container is called(two decimal places)
 def useToCon(product_name, uses):
-    return [(int(100 * (uses / UBP[product_name][1]) / UBP[product_name[0]])) / 100, UBP[product_name][2]]
+    return [(int(100 * (uses / UBP[product_name][1]) / UBP[product_name][0])) / 100, UBP[product_name][2]]
 
 
 # returns num of uses of product
@@ -37,7 +37,7 @@ def grpToUse(product_name, groups):
 
 # returns num of uses of product
 def grpToCon(product_name, groups):
-    return [(int(100 * (groups / UBP[product_name][0]))), UBP[product_name][2]]
+    return [(int(100 * (groups / UBP[product_name][0])))/100, UBP[product_name][2]]
 
 
 # returns num of uses of product

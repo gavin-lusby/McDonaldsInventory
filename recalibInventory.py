@@ -5,7 +5,6 @@
 
 from resetScreen import reset_screen
 
-
 def recalib_inventory(acc, curr_inv):
     # Check if necessary?
     reset_screen(True)

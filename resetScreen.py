@@ -2,7 +2,6 @@
 
 import os
 
-
 # Clears output and reprint header every time(T/F depending on if you want it to
 # say return to menu or end process)
 def reset_screen(return_to_menu):
