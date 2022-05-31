@@ -9,11 +9,11 @@ def print_inv(inv):
     for i in inv:
         print(i, inv[i])
 
+
 def new_shipment_up():
     while True:
-      inv = csvOperations.getInv() 
-      print_inv(inv)
-    
-  
+        inv = csvOperations.getInv()
+        print_inv(inv)
+
     pass
 # Returns nothing, edits inventory.csv

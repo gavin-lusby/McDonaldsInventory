@@ -21,21 +21,21 @@ def getInv():
     return products
 
 
-# Updates inventory stored in CSV to match the inventory stored in memory (since changes will be made to the memory-stored one by the users)
-# Format of inventory.csv: "buns,300"
+# Updates inventory stored in CSV to match the inventory stored in memory (since changes will be made to the
+# memory-stored one by the users) Format of inventory.csv: "buns,300"
 def setInv(updated_inv):
-  # Checks if changes would be redundant before making them
-  if updated_inv != getInv(): 
-    with open(ospath.join(syspath[0], "inventory.csv"), 'w', newline="") as f:
-      writer = csv.writer(f)
-      temp_inv_as_list = []
-      # Converts dictionary called inv into list of all of its keys
-      # since writerows only takes 2d lists as arguments(not dictionaries)
-      for item in list(updated_inv):
-        temp_inv_as_list.append([item,updated_inv[item]])
-      writer.writerows(temp_inv_as_list)
-    
-      
+    # Checks if changes would be redundant before making them
+    if updated_inv != getInv():
+        with open(ospath.join(syspath[0], "inventory.csv"), 'w', newline="") as f:
+            writer = csv.writer(f)
+            temp_inv_as_list = []
+            # Converts dictionary called inv into list of all of its keys
+            # since writerows only takes 2d lists as arguments(not dictionaries)
+            for item in list(updated_inv):
+                temp_inv_as_list.append([item, updated_inv[item]])
+            writer.writerows(temp_inv_as_list)
+
+
 # returns num of groups of product, and what a group is called(two decimal places)
 def useToGrp(product_name, uses):
     return [(int(100 * uses / UBP[product_name][1])) / 100, UBP[product_name][3]]
@@ -53,7 +53,7 @@ def grpToUse(product_name, groups):
 
 # returns num of uses of product
 def grpToCon(product_name, groups):
-    return [(int(100 * (groups / UBP[product_name][0])))/100, UBP[product_name][2]]
+    return [(int(100 * (groups / UBP[product_name][0]))) / 100, UBP[product_name][2]]
 
 
 # returns num of uses of product

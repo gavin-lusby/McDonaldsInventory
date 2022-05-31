@@ -19,7 +19,7 @@ a list that is stored as the value associated with that key. The number values g
 
 def start_menu():
     # Imports list of valid access accounts
-    validAccs = ["manager123","manager321" "employee1", "employee2","employee3"]
+    validAccs = ["manager123", "manager321" "employee1", "employee2", "employee3"]
 
     # Clear screen, ask for code
     reset_screen(False)
@@ -36,8 +36,6 @@ def start_menu():
         print("Invalid code, please try again.")
         acc = input("Please enter your access code correctly: ").lower()
 
-        
-        
         reset_screen(False)
         print(menus["funclist"])
         print("Invalid code, try again")
@@ -46,7 +44,7 @@ def start_menu():
     reset_screen(False)
     print(menus["funclist"])
 
-        # Calls on appropriate function for user's desired action
+    # Calls on appropriate function for user's desired action
 
     while True:
         act = input("SELECT AN ACTION: ")
@@ -80,8 +78,8 @@ if __name__ == "__main__":
     from exitMenu import exit_menu
     from resetScreen import reset_screen
     import csvOperations
-    # Importing from inventory.csv to create list of inventory units_by_product
 
+    # Importing from inventory.csv to create list of inventory units_by_product
 
     with open(os.path.join(sys.path[0], "menus.txt"), 'r') as f:
         raw_menus = []
