@@ -9,6 +9,7 @@ import csvo
 def check(Dict):  # Checks if input is valid
     check = input("What item would you like to check: ").lower()
     while True:  # loops through until valid input
+        item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()
         if check in Dict or check == 'all' or check == 'exit':
             break
         else:
@@ -16,30 +17,41 @@ def check(Dict):  # Checks if input is valid
     return item
 
 
-def printout(curr_inv, subdivs, item):
-    sub1 = curr_inv[item][1] // subdivs[item][2]  # Number of boxes
-    sub2 = curr_inv[item][1] % subdivs[item][2]  # Number of remaining uses
-    print(
-        f"There are {sub1} {subdivs[item][3]} and {sub2} {subdivs[item][4]} of {subdivs[item][0]} ({curr_inv[item][1]} uses).")
+"""    while True:
+        item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()
+
+        if item_name == "exit":
+            if checkIfSave:
+                return new_inv
+            else:
+                return curr_inv
+        # If the item mentioned is in the inventory, program asks user how much of the item they've taken off the
+        # inventory shelves"""
+
+
+def printout(item, curr_inv):
+    cons, grps = csvo.grpToConGrp(curr_inv[item])
+    print(f"There are {cons} {csvo.UBP[item][2]} and {grps} {csvo.UBP[item][3]} of {item} \
+    ({csvo.grpToUse(curr_inv[item])} uses).")
 
 
 def check_stock():
     curr_inv = csvo.getInv()
-    subdivs = csvo.UBP  # Fetches subdivision table to convert units with
     reset_screen(True)
 
-    search = check(subdivs)
+    while True:  # loops through until valid input
+        item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()
 
-    if search == "all":  # if user wants to see all
-        for a in subdivs:
-            printout(curr_inv, subdivs, a)
+        if item_name == "all":  # if user wants to see all
+            for item_name in curr_inv:
+                printout(item_name, curr_inv)
 
-    elif search == 'exit':
-        reset_screen(True)
-        pass
+        elif item_name == 'exit':
+            reset_screen(True)
+            pass
 
-    else:  # specific item
-        printout(curr_inv, subdivs, search)
+        else:  # specific item
+            printout(curr_inv, search)
 
     pass
 # Should return nothing (prints current curr_inv, may return current curr_inv in later versions)

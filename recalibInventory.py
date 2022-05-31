@@ -58,7 +58,7 @@ def recalib_inventory(acc):
                 else:
                     return curr_inv
 
-            new_inv[item_name] = csvo.conToGrp(item_name, item_con_amount)[0] + item_grp_amount
+            new_inv[item_name] = csvo.conToGrp(item_name, item_con_amount) + item_grp_amount
 
         else:  # If the user does not choose to exit entering items, and the item name isn't found in curr_inv (which
             # also doubles as a list of every valid item name), the following error message prints and the loop

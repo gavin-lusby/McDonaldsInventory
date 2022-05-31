@@ -37,6 +37,10 @@ def setInv(updated_inv):
             writer.writerows(temp_inv_as_list)
 
 
+"""
+Anything involving 'uses' is no longer necesarry as we don't have time to make the inventory auto-update
+based on till orders (making a till system at this point is out of the cards)
+
 # returns num of groups of product, and what a group is called(two decimal places)
 def useToGrp(product_name, uses):
     return [(int(100 * uses / UBP[product_name][1])) / 100, UBP[product_name][3]]
@@ -47,22 +51,25 @@ def useToCon(product_name, uses):
     return [(int(100 * (uses / UBP[product_name][1]) / UBP[product_name][0])) / 100, UBP[product_name][2]]
 
 
-# returns num of uses of product
-def grpToUse(product_name, groups):
-    return groups * UBP[product_name][1]
-
-
-# returns num of uses of product
-def grpToCon(product_name, groups):
-    return [(int(100 * (groups / UBP[product_name][0]))) / 100, UBP[product_name][2]]
-
 
 # returns num of uses of product
 def conToUse(product_name, cons):
     return cons * UBP[product_name][0] * UBP[product_name][1]
+"""
 
 
-# returns num of groups of product, and what a group is called
-# Example input: ("nuggets", 10), example output : [100, "bag(s)"]
+# returns num of containers and groups of product
+# Example input: ("nuggets", 105), example output : [10,5]
+def grpToConGrp(product_name, groups):
+    return [groups // UBP[product_name][0], groups % UBP[product_name][0]]
+
+
+# returns num of groups of product
+# Example input: ("nuggets", 10), example output : 100
 def conToGrp(product_name, cons):
-    return [cons * UBP[product_name][0], UBP[product_name][3]]
+    return cons * UBP[product_name][0]
+
+
+# returns num of uses of product
+def grpToUse(product_name, groups):
+    return groups * UBP[product_name][1]
