@@ -10,14 +10,13 @@ with open(ospath.join(syspath[0], "subdivs.csv"), 'r') as f:
     for product in list(reader):
         UBP[product[0]] = [int(product[1]), int(product[2])] + product[3:]
 
-
 # Fetches current inventory data and stores as dict in form of <product name> : <num of uses>
 def getInv():
     products = {}
     with open(ospath.join(syspath[0], "inventory.csv"), 'r') as f:
         reader = csv.reader(f)
         for item in list(reader):
-            products[item[0]] = item[1]
+            products[item[0]] = int(item[1])
 
     return products
 
