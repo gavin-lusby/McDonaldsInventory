@@ -4,6 +4,12 @@ from os import path as ospath
 from sys import path as syspath
 
 # UBP = units by product
+"""
+Creates a dict for the sake of converting and storing unit types. First item in
+each line(names of items) of csv becomes the key, and the rest of the items become
+a list that is stored as the value associated with that key. The number values get converted from string to int
+"""
+
 UBP = {}
 with open(ospath.join(syspath[0], "subdivs.csv"), 'r') as f:
     reader = csv.reader(f)

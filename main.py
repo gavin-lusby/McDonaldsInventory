@@ -7,11 +7,6 @@ GENERAL PROGRAMMING NOTES
 - subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
 """
 
-"""
-Creates a dict for the sake of converting and storing unit types. First item in
-each line(names of items) of csv becomes the key, and the rest of the items become
-a list that is stored as the value associated with that key. The number values get converted from string to int
-"""
 
 
 # Starting menu
@@ -19,21 +14,19 @@ a list that is stored as the value associated with that key. The number values g
 
 def start_menu():
     # Imports list of valid access accounts
-    validAccs = ["manager123", "manager321" "employee1", "employee2", "employee3"]
+    valid_accs = ["manager123", "manager321" "employee1", "employee2", "employee3"]
 
-    # Clear screen, ask for code
-    reset_screen(False)
-    print(menus["funclist"])
-    acc = input("Please enter your access code correctly: ").lower()
+    acc = None
 
     # Keep looping till code is invalid, or "exit"
-    while acc not in validAccs:
+    while acc not in valid_accs:
         # Exits program if exit option chosen
         if acc == "exit":
             exit_menu()
         reset_screen(False)
         print(menus["funclist"])
-        print("Invalid code, please try again.")
+        if acc is not None: # Makes sure this code doesn't run the first time, only subsequent times
+            print("Invalid code, please try again.")
         acc = input("Please enter your access code correctly: ").lower()
 
         reset_screen(False)
@@ -47,14 +40,16 @@ def start_menu():
     # Calls on appropriate function for user's desired action
 
     while True:
-        act = input("SELECT AN ACTION: ")
+        act = input("SELECT AN ACTION: ").strip()
         act_valid = True
         if act == "1":
-            new_shipment_up()
+            csvo.setInv(add_to_inventory(acc))
         elif act == "2":
             csvo.setInv(recalib_inventory(acc))
         elif act == "3":
             check_stock()
+        elif act == "4":
+            csvo.setInv(remove_from_inventory(acc))
         elif act == "exit":
             exit_menu()
         else:
@@ -71,9 +66,9 @@ if __name__ == "__main__":
     import sys
     import os
 
-    # Imports functions used
+    # Import functions used
     from newShipmentUp import new_shipment_up
-    from recalibInventory import recalib_inventory
+    from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
     from exitMenu import exit_menu
     from resetScreen import reset_screen
