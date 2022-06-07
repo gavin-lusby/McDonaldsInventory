@@ -13,8 +13,8 @@ def check(Dict):  # Checks if input is valid
         if check in Dict or check == 'all' or check == 'exit':
             break
         else:
-            check = input("\nItem not in inventory, please try again: ").lower()
-    return check
+            item = input("\nItem not in inventory, please try again: ").lower()
+    return item
 
 
 """    while True:
