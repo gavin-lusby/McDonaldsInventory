@@ -5,6 +5,7 @@ Purpose: Create a comprehensive inventory software for McDonald's employees and 
 
 GENERAL PROGRAMMING NOTES
 - subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
+- Some changes were committed in-meet or commits weren't made, so we left a few 'edited by' header comments
 """
 
 

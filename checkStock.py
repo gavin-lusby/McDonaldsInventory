@@ -7,18 +7,6 @@ import csvo
 # Edited by Isaac (2022-05-31) Officially works with dictionary and clean up
 
 
-"""    while True:
-        item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()
-
-        if item_name == "exit":
-            if checkIfSave:
-                return new_inv
-            else:
-                return curr_inv
-        # If the item mentioned is in the inventory, program asks user how much of the item they've taken off the
-        # inventory shelves"""
-
-
 def printout(item, curr_inv):
     cons, grps = csvo.grpToConGrp(item, curr_inv[item])
     print(f"There are {cons} {csvo.UBP[item][2]} worth of {item} and {grps} {csvo.UBP[item][3]} worth of {item}"
