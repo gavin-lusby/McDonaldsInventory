@@ -62,12 +62,9 @@ def start_menu():
 
 # Only runs main if main is being run directly
 if __name__ == "__main__":
-    import csv
     import sys
     import os
-
     # Import functions used
-    from newShipmentUp import new_shipment_up
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
     from exitMenu import exit_menu

@@ -6,16 +6,6 @@ import csvo
 # Edited by Isaac (2022-05-23)
 # Edited by Isaac (2022-05-31) Officially works with dictionary and clean up
 
-def check(Dict):  # Checks if input is valid
-    check = input("What item would you like to check: ").lower()
-    while True:  # loops through until valid input
-        item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()
-        if check in Dict or check == 'all' or check == 'exit':
-            break
-        else:
-            item = input("\nItem not in inventory, please try again: ").lower()
-    return item
-
 
 """    while True:
         item_name = input(str("Enter the plural name of one item taken (ex. tomatoes): ")).lower()

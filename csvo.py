@@ -1,4 +1,4 @@
-# Short for CSV Operations
+# csvo is short for CSV Operations
 import csv
 from os import path as ospath
 from sys import path as syspath
