@@ -1,5 +1,5 @@
 """
-Written by: Gavin, Isaac, Katie, Nikolas
+Written by: Gavin, Isaac, Katie
 Date: May 12-June 10, 2022
 Purpose: Create a comprehensive inventory software for McDonald's employees and managers to use
 

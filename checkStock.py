@@ -39,7 +39,7 @@ def check_stock():
     curr_inv = csvo.getInv()
     list_of_items = []
     reset_screen(True)
-    item_name = input(str("Enter \"all\" or the plural name of a specific item to view stock level: ")).lower()
+    item_name = input(str("Enter \"all\" or the plural name of a specific item (ex. tomatoes) to view stock level: ")).lower()
     while True:  # loops through until valid input
         reset_screen(True)
 
