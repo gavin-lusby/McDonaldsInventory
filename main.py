@@ -1,4 +1,4 @@
-#Please see readme.md file for notes! :) 
+# Please see readme.md file for notes! :)
 
 
 # Starting menu
@@ -16,7 +16,7 @@ def start_menu():
         if acc == "exit":
             exit_menu()
         reset_screen(False)
-        if acc is not None: # Makes sure this code doesn't run the first time, only subsequent times
+        if acc is not None:  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid code, please try again.")
         acc = input("Please enter your access code correctly: ").lower()
 

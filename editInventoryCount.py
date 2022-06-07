@@ -5,11 +5,11 @@
 # Edited by Katie (2022-05-30)
 # Edited by Katie, Gavin (2022-05-31)
 import fetchparams
-from resetScreen import reset_screen
 from csvo import getInv
+from resetScreen import reset_screen
 
 
-# For manager to recalibrate stock level values(in the case of employees neglegence skewing stock numbers over time)
+# For manager to recalibrate stock level values(in the case of employees negligence skewing stock numbers over time)
 def recalib_inventory(acc):
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {acc}")

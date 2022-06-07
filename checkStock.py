@@ -1,6 +1,6 @@
 # Manager or employees check stock (how much has been used, how much needs to be ordered)
-from resetScreen import reset_screen
 import csvo
+from resetScreen import reset_screen
 
 
 # Edited by Isaac (2022-05-23)
@@ -17,7 +17,8 @@ def check_stock():
     curr_inv = csvo.getInv()
     list_of_items = []
     reset_screen(True)
-    item_name = input(str("Enter \"all\" or the plural name of a specific item (ex. tomatoes) to view stock level: ")).lower()
+    item_name = input(
+        str("Enter \"all\" or the plural name of a specific item (ex. tomatoes) to view stock level: ")).lower()
     while True:  # loops through until valid input
         reset_screen(True)
 

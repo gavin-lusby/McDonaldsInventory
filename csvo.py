@@ -16,6 +16,7 @@ with open(ospath.join(syspath[0], "subdivs.csv"), 'r') as f:
     for product in list(reader):
         UBP[product[0]] = [int(product[1]), int(product[2])] + product[3:]
 
+
 # Fetches current inventory data and stores as dict in form of <product name> : <num of uses>
 def getInv():
     products = {}
@@ -43,7 +44,7 @@ def setInv(updated_inv):
 
 
 """
-Anything involving 'uses' is no longer necesarry as we don't have time to make the inventory auto-update
+Anything involving 'uses' is no longer necessary as we don't have time to make the inventory auto-update
 based on till orders (making a till system at this point is out of the cards)
 
 # returns num of groups of product, and what a group is called(two decimal places)

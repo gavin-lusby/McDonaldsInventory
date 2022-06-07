@@ -15,7 +15,7 @@ def checkIfSave():
         return False
     else:
         # If user indicates anything but 'n', assume
-        # they want to save changes as to ensure if they accidently
+        # they want to save changes as to ensure if they accidentally
         # type something that is neither n, nor y, the program is saving
         # the changes
         return True
@@ -68,7 +68,7 @@ def fetch_item_grps(action_name):
                               f" item {action_name} (ex. tomatoes): ")).lower().strip()
         if item_name == "all":
             if set(csvo.UBP) == set(changes):
-              print("All items have already been accounted for. Exiting to menu.")
+                print("All items have already been accounted for. Exiting to menu.")
             else:
                 for item in csvo.UBP:
                     if item not in changes:  # Skips over items they already {actioned}
@@ -80,7 +80,7 @@ def fetch_item_grps(action_name):
                             else:
                                 input(f"Changes not saved. Press enter to continue.")
                                 return {}
-    
+
                         changes[item] = csvo.conToGrp(item, item_con_grp[0]) + item_con_grp[1]
 
             if checkIfSave():
