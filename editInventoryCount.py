@@ -15,7 +15,7 @@ def recalib_inventory(acc):
     print(f"Welcome, {acc}")
 
     curr_inv = getInv()  # Fetches current inventory
-    changes = fetchparams.fetch_item_cons_grps("counted")
+    changes = fetchparams.fetch_item_grps("counted")
     for item in list(changes):
         curr_inv[item] = changes[item]
 
@@ -27,7 +27,7 @@ def remove_from_inventory(acc):
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {acc}")
     curr_inv = getInv()  # Fetches current inventory
-    changes = fetchparams.fetch_item_cons_grps("removed/consumed")
+    changes = fetchparams.fetch_item_grps("removed/consumed")
     for item in list(changes):
         this_change = curr_inv[item] - changes[item]
         if this_change < 0:
@@ -42,7 +42,7 @@ def add_to_inventory(acc):
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {acc}")
     curr_inv = getInv()  # Fetches current inventory
-    changes = fetchparams.fetch_item_cons_grps("received")
+    changes = fetchparams.fetch_item_grps("received")
     for item in list(changes):
         this_change = curr_inv[item] + changes[item]
         if this_change < 0:

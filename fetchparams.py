@@ -20,6 +20,7 @@ def checkIfSave():
         # the changes
         return True
 
+
 # Asks user the amount of containers and groups of given item {actioned}, and returns in list of length 2
 # If the user indicated they want to exit the menu, returns ["exit",True/False] depending on whether they wanted to
 # save or not
@@ -54,15 +55,16 @@ def ask_item_cons_grps(item_name, action_name):
 
     return [item_con_amount, item_grp_amount]
 
+
 # The point of this function is to ask a user for the amount of groups and containers {actioned} of any products
 # In order to adjust stock level accordingly
-def fetch_item_cons_grps(action_name):
+def fetch_item_grps(action_name):
     changes = {}
     # This dict gets returned at the end in form {item_name: groups of product} for its outer
     # function to determine what to do with these values(either add to, remove from, or set as stock level
 
     while True:
-        item_name = input(str(f"Enter \"all\" OR the plural name of one" 
+        item_name = input(str(f"Enter \"all\" OR the plural name of one"
                               f" item {action_name} (ex. tomatoes): ")).lower().strip()
         if item_name == "all":
             for item in csvo.UBP:
