@@ -67,39 +67,44 @@ def fetch_item_grps(action_name):
         item_name = input(str(f"Enter \"all\" OR the plural name of one"
                               f" item {action_name} (ex. tomatoes): ")).lower().strip()
         if item_name == "all":
-            for item in csvo.UBP:
-                if item not in changes:  # Skips over items they already {actioned}
-                    item_con_grp = ask_item_cons_grps(item, action_name)
-                    if item_con_grp[0] == "exit":
-                        if item_con_grp[1]:
-                            input(f"Items {action_name}. Press enter to continue.")
-                            return changes
-                        else:
-                            input(f"Changes not saved. Press enter to continue.")
-                            return {}
-
-                    changes[item] = csvo.conToGrp(item, item_con_grp[0]) + item_con_grp[1]
+            if set(csvo.UBP) == set(changes):
+              print("All items have already been accounted for. Exiting to menu.")
+            else:
+                for item in csvo.UBP:
+                    if item not in changes:  # Skips over items they already {actioned}
+                        item_con_grp = ask_item_cons_grps(item, action_name)
+                        if item_con_grp[0] == "exit":
+                            if item_con_grp[1]:
+                                input(f"Items {action_name}. Press enter to save changes.")
+                                return changes
+                            else:
+                                input(f"Changes not saved. Press enter to continue.")
+                                return {}
+    
+                        changes[item] = csvo.conToGrp(item, item_con_grp[0]) + item_con_grp[1]
 
             if checkIfSave():
-                input(f"Items {action_name}. Press enter to continue.")
+                input(f"Items {action_name}. Press enter to save changes.")
                 return changes
             else:
                 input(f"Changes not saved. Press enter to continue.")
                 return {}
         elif item_name == "exit":
             if checkIfSave():
-                input(f"Items {action_name}. Press enter to continue.")
+                input(f"Items {action_name}. Press enter to save changes.")
                 return changes
             else:
                 input(f"Changes not saved. Press enter to continue.")
                 return {}
         # If the item mentioned is in the inventory, program asks user how much of the item they've {actioned}
         elif item_name in csvo.UBP:
+            if item_name in changes:
+                print(f"(WARNING): Overwriting existing change for {item_name}")
             item_con_grp = ask_item_cons_grps(item_name, action_name)
 
             if item_con_grp[0] == "exit":
                 if item_con_grp[1]:
-                    input(f"Items {action_name}. Press enter to continue.")
+                    input(f"Items {action_name}. Press enter to save changes.")
                     return changes
                 else:
                     input(f"Changes not saved. Press enter to continue.")

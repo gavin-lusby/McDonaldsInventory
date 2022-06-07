@@ -1,2 +1,2 @@
 --------------------------------\n--- McD Inventory Management ---\n--------------------------------\nType exit at any time to end process\n\n
--------- SELECTION MENU --------\n---- 1. Upload New Shipment ----\n--- 2. Recalibrate Inventory ---\n-------- 3. Check Stock --------\n--------------------------------
+-------- SELECTION MENU --------\n---- 1. Upload New Shipment ----\n--- 2. Recalibrate Inventory ---\n-------- 3. Check Stock --------\n--- 4. Remove From Inventory ---\n--------------------------------

@@ -24,13 +24,11 @@ def start_menu():
         if acc == "exit":
             exit_menu()
         reset_screen(False)
-        print(menus["funclist"])
         if acc is not None: # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid code, please try again.")
         acc = input("Please enter your access code correctly: ").lower()
 
         reset_screen(False)
-        print(menus["funclist"])
         print("Invalid code, try again")
 
     # Clears the screen to prevent access codes from being seen by other users (privacy concern)
