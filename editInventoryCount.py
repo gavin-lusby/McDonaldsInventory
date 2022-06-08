@@ -10,9 +10,9 @@ from resetScreen import reset_screen
 
 
 # For manager to recalibrate stock level values(in the case of employees negligence skewing stock numbers over time)
-def recalib_inventory(acc):
+def recalib_inventory(userName):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {acc}")
+    print(f"Welcome, {userName}")
 
     curr_inv = getInv()  # Fetches current inventory
     changes = fetchparams.fetch_item_grps("counted")
@@ -23,9 +23,9 @@ def recalib_inventory(acc):
 
 
 # If employee is removing product from shelves, they document it here
-def remove_from_inventory(acc):
+def remove_from_inventory(userName):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {acc}")
+    print(f"Welcome, {userName}")
     curr_inv = getInv()  # Fetches current inventory
     changes = fetchparams.fetch_item_grps("removed/consumed")
     for item in list(changes):
@@ -38,9 +38,9 @@ def remove_from_inventory(acc):
 
 
 # For manager to document incoming shipment to add to stock levels(without the need to recount existing product)
-def add_to_inventory(acc):
+def add_to_inventory(userName):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {acc}")
+    print(f"Welcome, {userName}")
     curr_inv = getInv()  # Fetches current inventory
     changes = fetchparams.fetch_item_grps("received")
     for item in list(changes):

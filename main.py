@@ -1,29 +1,55 @@
 # Please see readme.md file for notes! :)
 
+import csv
+from os import path as ospath
+from sys import path as syspath
+
 
 # Starting menu
 # Runs for entire program; main piece of program
 
 def start_menu():
-    # Imports list of valid access accounts
-    valid_accs = ["manager123", "manager321" "employee1", "employee2", "employee3"]
+    # Imports list of valid access accounts from users.csv
+    valid_accs = {}
+  
+    with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
+      reader = csv.reader(f)
+      for userAcc in list(reader):
+          valid_accs[userAcc[0].upper()] = userAcc[1]
 
-    acc = None
+    userName = None
+    userPass = None
 
-    # Keep looping till code is invalid, or "exit"
-    while acc not in valid_accs:
-        # Exits program if exit option chosen
-        if acc == "exit":
+    # Keep looping until user's full name is valid, or "exit" is chosen
+    # userName is stored in all uppercase as case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their full name
+    while userName not in valid_accs:
+        reset_screen(False)
+        userName = str(input("Please enter your full name correctly: ")).upper()
+      
+      # Exits program if exit option chosen
+        if userName == "EXIT":
             exit_menu()
         reset_screen(False)
-        if acc is not None:  # Makes sure this code doesn't run the first time, only subsequent times
-            print("Invalid code, please try again.")
-        acc = input("Please enter your access code correctly: ").lower()
+        if userName is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+            print("Invalid name, please try again.")
+        
+        reset_screen(False)
+        print("Invalid name, please try again.")
+
+    # Keep looping until user's password is valid, or "exit" is chosen
+    while userPass != valid_accs.get(userName):
+        # Exits program if exit option chosen
+        if userPass == "exit":
+            exit_menu()
+        reset_screen(False)
+        if userPass is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+            print("Invalid password, please try again.")
+        userPass = str(input("Please enter your password correctly (case-sensitive): "))
 
         reset_screen(False)
-        print("Invalid code, try again")
-
-    # Clears the screen to prevent access codes from being seen by other users (privacy concern)
+        print("Invalid password, please try again.")
+      
+    # Clears the screen to prevent passwords from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
 
@@ -33,13 +59,13 @@ def start_menu():
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True
         if act == "1":
-            csvo.setInv(add_to_inventory(acc))
+            csvo.setInv(add_to_inventory(userName))
         elif act == "2":
-            csvo.setInv(recalib_inventory(acc))
+            csvo.setInv(recalib_inventory(userName))
         elif act == "3":
             check_stock()
         elif act == "4":
-            csvo.setInv(remove_from_inventory(acc))
+            csvo.setInv(remove_from_inventory(userName))
         elif act == "exit":
             exit_menu()
         else:
