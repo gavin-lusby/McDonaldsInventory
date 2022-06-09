@@ -97,7 +97,7 @@ if __name__ == "__main__":
     # Import functions used
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
-    from createAccs import manager_check
+    from accFuncts import manager_check
     from exitMenu import exit_menu
     from resetScreen import reset_screen
     from itemHelp import item_help

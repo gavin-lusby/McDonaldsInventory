@@ -122,5 +122,8 @@ def remove_item(user_name) :
 
         elif removing_item in new_subdivs:
             print(f"Removal of  {removing_item} recorded.")
+            del new_subdivs[removing_item]
+            del new_inv[removing_item]
         else:
             print("Invalid name. Please try again.")
+            
