@@ -8,6 +8,8 @@
 
 # GENERAL PROGRAMMING NOTES
 
+# --> We've noticed some bugs in the console output (presumably because some of the program was coded in PyCharm and some in Replit). The code itself should be fine; if you encounter weird bugs in the console print statements, reloading and running the program again should fix the issue.
+
 # --> subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
 
 # --> Some changes were committed in-meet or commits weren't made though changes were, so they don't show up on the GitHub commit/push history. To accurately reflect who contributed what, we left a few 'edited by' header comments (Gavin and Katie mostly committed/pushed so those edits will show up and be attributed to our accounts on GitHub, so we thought putting them here in Replit comments again would be unnecessary).
