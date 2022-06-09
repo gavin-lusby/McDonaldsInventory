@@ -1,0 +1,2 @@
+\n---- ACCOUNT SETTINGS MENU ---\n------ 1. Change Password ------\n--- 2. Recalibrate Inventory ---\n-------- 3. Check Stock --------\n--- 4. Remove From Inventory ---\n--------------------------------
+\n----- 2. Create New Account ----\n----- 3. Delete An Account -----

@@ -9,13 +9,13 @@ from sys import path as syspath
 # Runs for entire program; main piece of program
 
 def start_menu():
-    # Imports list of valid access accounts from users.csv
+    # Imports dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or employee, value #2 = user's password)
     valid_accs = {}
   
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
       reader = csv.reader(f)
       for userAcc in list(reader):
-          valid_accs[userAcc[0].upper()] = userAcc[1]
+          valid_accs[userAcc[0].upper()] = [userAcc[1],userAcc[2]]
 
     userName = None
     userPass = None
@@ -66,6 +66,9 @@ def start_menu():
             check_stock()
         elif act == "4":
             csvo.setInv(remove_from_inventory(userName))
+        elif act == "5":
+            pass
+          
         elif act == "exit":
             exit_menu()
         else:
