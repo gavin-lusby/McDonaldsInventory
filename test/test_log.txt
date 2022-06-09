@@ -7,10 +7,12 @@ works - in list
 
 2. Access Code (any input vaild)
 
-works, hass dif message  - correct for user
+works, has dif message  - correct for user
 works  - incorrect for user
 
 3. New Shipment
+  - can only uploade for items in dict
+  - numbers can only be positi
 
 
 4. Recalibrate Inventory
