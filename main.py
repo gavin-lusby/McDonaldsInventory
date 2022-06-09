@@ -60,13 +60,9 @@ def start_menu():
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True
 
-        # Manager-only functions
-        emp_forbid = ["1","2"]
 
         # Ensures only managers can access manager-only functions
-        if manager_check(userName,valid_accs) == False and act in emp_forbid:
-            print("Sorry, employees cannot access this function.")
-        elif act == "1" and manager_check(userName,valid_accs) == True:
+        if act == "1" and manager_check(userName,valid_accs) == True:
             csvo.setInv(add_to_inventory(userName))
         elif act == "2" and manager_check(userName,valid_accs) == True:
             csvo.setInv(recalib_inventory(userName))
@@ -75,8 +71,7 @@ def start_menu():
         elif act == "4":
             csvo.setInv(remove_from_inventory(userName))
         elif act == "5":
-            manager_check(userName,valid_accs)
-          
+            pass
         elif act == "exit":
             exit_menu()
         else:
