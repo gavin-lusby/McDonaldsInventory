@@ -9,14 +9,15 @@ from resetScreen import reset_screen
 
 def printout(item, curr_inv):
     cons, grps = csvo.grpToConGrp(item, curr_inv[item])
-    print(f"There are {cons} {csvo.UBP[item][2]} worth of {item} and {grps} {csvo.UBP[item][3]} worth of {item}"
-          f"  ({csvo.grpToUse(item, curr_inv[item])} uses).")
+    print(f"There are {cons} {csvo.fetchUBP()[item][2]} worth of {item} and {grps} {csvo.fetchUBP()[item][3]} worth "
+          f"of {item}  ({csvo.grpToUse(item, curr_inv[item])} uses).")
 
 
-def check_stock():
+def check_stock(user_name):
     curr_inv = csvo.getInv()
     list_of_items = []
-    reset_screen(True)
+    reset_screen(True)  # resets screen with return to menu suggestion
+    print(f"Welcome, {user_name}")
     item_name = input(
         str("Enter \"all\" or the plural name of a specific item (ex. tomatoes) to view stock level: ")).lower()
     while True:  # loops through until valid input
@@ -41,7 +42,7 @@ def check_stock():
         else:
             for item in list_of_items:
                 printout(item, curr_inv)
-            print("Invalid item name.")
+            print("Invalid name. Please try again.")
         if len(list_of_items) == len(curr_inv):  # If user manually selects every item, treat as if they typed "all"
             item_name = "all"
         else:

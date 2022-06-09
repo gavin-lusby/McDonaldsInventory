@@ -10,7 +10,7 @@
 
 # --> subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
 
-# --> Some changes were committed in-meet or commits weren't made though changes were, so they don't show up on the GitHub commit/push history. To accurately reflect who contributed what, we left a few 'edited by' header comments (Gavin and Katie mostly committed/pushed so those edits will show up and be attributed to our accounts on GitHub, so we thought putting them here in Replit comments again would be unnecessary). 
+# --> Some changes were committed in-meet or commits weren't made though changes were, so they don't show up on the GitHub commit/push history. To accurately reflect who contributed what, we left a few 'edited by' header comments (Gavin and Katie mostly committed/pushed so those edits will show up and be attributed to our accounts on GitHub, so we thought putting them here in Replit comments again would be unnecessary).
 
 # --> The M333r GitHub account is Gavin (on the GitHub he made some commits from the wrong account)
 

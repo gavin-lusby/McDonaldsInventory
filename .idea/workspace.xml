@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c766ec2-d34d-4230-8323-3dfb17569c7b" name="Changes" comment="Minor comments/organization">
+    <list default="true" id="6c766ec2-d34d-4230-8323-3dfb17569c7b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/createNewItem.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/itemHelp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accMenus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/accMenus.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkStock.py" beforeDir="false" afterPath="$PROJECT_DIR$/checkStock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/createAccs.py" beforeDir="false" afterPath="$PROJECT_DIR$/createAccs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csvo.py" beforeDir="false" afterPath="$PROJECT_DIR$/csvo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fetchparams.py" beforeDir="false" afterPath="$PROJECT_DIR$/fetchparams.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory.csv" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/menus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/menus.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/passHash.py" beforeDir="false" afterPath="$PROJECT_DIR$/passHash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subdivs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/subdivs.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -22,19 +43,36 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/accMenus.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/checkStock.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/createNewItem.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/csvo.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fetchparams.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hidden.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/inventory.csv" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/menus.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/subdivs.csv" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Unnamed" pattern="file[McDonaldsInventory]:*/&amp;&amp;!file[McDonaldsInventory]:.idea//*&amp;&amp;!file[McDonaldsInventory]:venv//*" />
   </component>
   <component name="ProjectId" id="29hwOC4j1fJQZvbFjlgF28BdiWA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "F:/PycharmProjects/McDonaldsInventory/subdivs.csv",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "two.files.diff.last.used.file": "F:/PycharmProjects/McDonaldsInventory/subdivs.csv"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="McDonaldsInventory" />

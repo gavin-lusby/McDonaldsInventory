@@ -9,38 +9,38 @@ from sys import path as syspath
 # Runs for entire program; main piece of program
 
 def start_menu():
-    from passHash import hash_file
-  
-    # Creates dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or employee, value #2 = user's password)
+    # Creates dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or
+    # employee, value #2 = user's password)
     valid_accs = {}
-  
+
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
-      reader = csv.reader(f)
+        reader = csv.reader(f)
 
-      for userAcc in list(reader):
-          valid_accs[userAcc[0].upper()] = [userAcc[1],userAcc[2]]
+        for userAcc in list(reader):
+            valid_accs[userAcc[0].upper()] = [userAcc[1], userAcc[2]]
 
-    valid_accs.sort()
-    hash_file(valid_accs)
-  
+    # valid_accs.sort()
+    # hash_file(valid_accs)
+
     userName = None
     userPass = None
 
-    # Keep looping until user's full name is valid, or "exit" is chosen
-    # userName is stored in all uppercase as case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their full name
+    # Keep looping until user's full name is valid, or "exit" is chosen userName is stored in all uppercase as
+    # case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their
+    # full name
     while userName not in valid_accs:
         reset_screen(False)
         userName = str(input("Please enter your full name correctly: ")).upper()
-      
-      # Exits program if exit option chosen
+
+        # Exits program if exit option chosen
         if userName == "EXIT":
             exit_menu()
         reset_screen(False)
         if userName is not None:  # Makes sure this code doesn't run the first time, only subsequent times
-            print("Invalid name, please try again.")
-        
+            print("Invalid name. Please try again.")
+
         reset_screen(False)
-        print("Invalid name, please try again.")
+        print("Invalid name. Please try again.")
 
     # Keep looping until user's password is valid, or "exit" is chosen
     while userPass != valid_accs.get(userName)[1]:
@@ -49,12 +49,12 @@ def start_menu():
             exit_menu()
         reset_screen(False)
         if userPass is not None:  # Makes sure this code doesn't run the first time, only subsequent times
-            print("Invalid password, please try again.")
+            print("Invalid password. Please try again.")
         userPass = str(input("Please enter your password correctly (case-sensitive): "))
 
         reset_screen(False)
-        print("Invalid password, please try again.")
-      
+        print("Invalid password. Please try again.")
+
     # Clears the screen to prevent passwords from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
@@ -65,18 +65,21 @@ def start_menu():
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True
 
-
         # Ensures only managers can access manager-only functions
-        if act == "1" and manager_check(userName,valid_accs) == True:
+        if act == "1" and manager_check(userName, valid_accs) == True:
             csvo.setInv(add_to_inventory(userName))
-        elif act == "2" and manager_check(userName,valid_accs) == True:
+        elif act == "2" and manager_check(userName, valid_accs) == True:
             csvo.setInv(recalib_inventory(userName))
-        elif act == "3":
-            check_stock()
+        elif act == "3" and manager_check(userName, valid_accs) == True:
+            this_inv, this_subdiv = create_new_item(userName)
+            csvo.setInv(this_inv)
+            csvo.overwriteSubdivs(this_subdiv)
         elif act == "4":
-            csvo.setInv(remove_from_inventory(userName))
+            check_stock(userName)
         elif act == "5":
-            pass
+            csvo.setInv(remove_from_inventory(userName))
+        elif act == "6":
+            item_help()
         elif act == "exit":
             exit_menu()
         else:
@@ -84,7 +87,7 @@ def start_menu():
         reset_screen(False)
         print(menus["funclist"])
         if not act_valid:
-            print("Invalid action, try again")
+            print("Invalid action. Please try again.")
 
 
 # Only runs main if main is being run directly
@@ -97,7 +100,9 @@ if __name__ == "__main__":
     from createAccs import manager_check
     from exitMenu import exit_menu
     from resetScreen import reset_screen
-    import csvo  
+    from itemHelp import item_help
+    import csvo
+    from createNewItem import create_new_item
 
     # Importing from inventory.csv to create list of inventory units_by_product
 
