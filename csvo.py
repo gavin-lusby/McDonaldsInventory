@@ -22,7 +22,6 @@ def fetchUBP():
 
 # Overwrites subdivs.csv and updated UBP
 def overwriteSubdivs(new_UBP):
-    global UBP
     # Checks if changes would be redundant before making them
     if new_UBP != fetchUBP():
         with open(ospath.join(syspath[0], "subdivs.csv"), 'w', newline="") as f:
@@ -71,31 +70,6 @@ def setInv(updated_inv):
             writer.writerows(temp_inv_as_list)
 
 
-"""
-Anything involving 'uses' is no longer necessary as we don't have time to make the inventory auto-update
-based on till orders (making a till system at this point is out of the cards). The only use we have for uses now
-is to include how many total uses you have of each product when checking stock. We still record amount of uses though
-so that the program is future proof for if we wanted to/had time to add a till system further on(in a realistic scenario
-it would be wise to ensure that our product will be compatible with its own updates as there would be no reason to 
-presume we won't eventually make said updates as a real company)
-
-# returns num of groups of product, and what a group is called(two decimal places)
-def useToGrp(product_name, uses):
-    return [(int(100 * uses / UBP[product_name][1])) / 100, UBP[product_name][3]]
-
-
-# returns num of containers of product, and what a container is called(two decimal places)
-def useToCon(product_name, uses):
-    return [(int(100 * (uses / UBP[product_name][1]) / UBP[product_name][0])) / 100, UBP[product_name][2]]
-
-
-
-# returns num of uses of product
-def conToUse(product_name, cons):
-    return cons * UBP[product_name][0] * UBP[product_name][1]
-"""
-
-
 # returns num of containers and groups of product
 # Example input: ("nuggets", 105), example output : [10,5]
 def grpToConGrp(product_name, groups):
@@ -125,3 +99,34 @@ def checkIfSave():
             return True
         else:
             print("Invalid response.")
+
+
+"""
+-------------------------------------------------------------------------
+Anything involving 'uses' is no longer necessary as we don't have time to make the inventory auto-update
+based on till orders (making a till system at this point is out of the cards). The only use we have for uses now
+is to include how many total uses you have of each product when checking stock. We still record amount of uses though
+so that the program is future proof for if we wanted to/had time to add a till system further on(in a realistic scenario
+it would be wise to ensure that our product will be compatible with its own updates as there would be no reason to 
+presume we won't eventually make said updates as a real company)
+
+# The comment above is in reference to the functions below; we're no longer using these functions but thought it would still be helpful to keep a record of them
+
+# returns num of groups of product, and what a group is called(two decimal places)
+def useToGrp(product_name, uses):
+    ubp = fetchUBP()
+    return [(int(100 * uses / ubp[product_name][1])) / 100, ubp[product_name][3]]
+
+
+# returns num of containers of product, and what a container is called(two decimal places)
+def useToCon(product_name, uses):
+    ubp = fetchUBP()
+    return [(int(100 * (uses / ubp[product_name][1]) / ubp[product_name][0])) / 100, ubp[product_name][2]]
+
+
+
+# returns num of uses of product
+def conToUse(product_name, cons):
+    ubp = fetchUBP()
+    return cons * ubp[product_name][0] * ubp[product_name][1]
+"""

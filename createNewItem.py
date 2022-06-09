@@ -105,3 +105,22 @@ def create_new_item(user_name):
             new_inv[new_item] = 0
             print(f"{new_item} has been recorded with 0 {con_name} and 0 {grp_name}. Exit, save, and recalibrate"
                   f" to adjust values.")
+
+def remove_item(user_name) :
+    resetScreen.reset_screen(True)  # resets screen with return to menu suggestion
+    curr_inv = csvo.getInv()
+    new_inv = dict(curr_inv)  # copy of curr_inv
+    subdivs = csvo.fetchUBP()
+    new_subdivs = dict(subdivs)  # copy of subdivs
+    print(f"Welcome, {user_name}")
+    while True:
+        removing_item = input("Please enter the name of the new item you would like to add to inventory"
+                         "(plural): ").lower().strip()
+
+        if removing_item == "exit":
+            return return_to_menu(csvo.checkIfSave(), new_inv, new_subdivs, curr_inv, subdivs)
+
+        elif removing_item in new_subdivs:
+            print(f"Removal of  {removing_item} recorded.")
+        else:
+            print("Invalid name. Please try again.")

@@ -1,9 +1,26 @@
 2022 - 06 - 09
 
-1.  
+1. User Name (any input valid)
 
- - large
- - decimal
- - string
- - negative
- - propper
+works but should have some other message, confusing  - not in list
+works - in list
+
+2. Access Code (any input vaild)
+
+works, hass dif message  - correct for user
+works  - incorrect for user
+
+3. New Shipment
+
+
+4. Recalibrate Inventory
+
+5. Create New Item
+
+6. Check Stock
+
+7. Remove From Inventory
+
+8. Help - works
+
+20. Manager vs Employee
