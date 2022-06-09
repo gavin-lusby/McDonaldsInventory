@@ -63,11 +63,11 @@ def start_menu():
         elif act == "2":
             csvo.setInv(recalib_inventory(userName))
         elif act == "3":
-            check_stock()
+            check_stock(userName,valid_accs)
         elif act == "4":
             csvo.setInv(remove_from_inventory(userName))
         elif act == "5":
-            pass
+            manager_check()
           
         elif act == "exit":
             exit_menu()
@@ -86,9 +86,10 @@ if __name__ == "__main__":
     # Import functions used
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
+    from createAccs import manager_check
     from exitMenu import exit_menu
     from resetScreen import reset_screen
-    import csvo
+    import csvo  
 
     # Importing from inventory.csv to create list of inventory units_by_product
 
