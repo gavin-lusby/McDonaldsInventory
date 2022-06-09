@@ -12,12 +12,16 @@ works  - incorrect for user
 
 3. New Shipment
   - can only uploade for items in dict
-  - numbers can only be positi
-
+  - numbers can only be positive integers (string negative and deciaml did not work)
+  - handles large and small numbers
 
 4. Recalibrate Inventory
+  see 3
 
 5. Create New Item
+  
+  
+
 
 6. Check Stock
 
