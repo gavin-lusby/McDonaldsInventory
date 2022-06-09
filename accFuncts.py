@@ -27,7 +27,7 @@ def manager_check(userName, valid_accs):
 
 
 def acc_menu(manager_status):
-    # Prints menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
+    # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
   if manager_status == True:
       acc_menu = acc_menus_lst[0]
   else:
@@ -51,7 +51,7 @@ def acc_menu(manager_status):
     else:
         act_valid = False
     reset_screen(False)
-    print(acc_menu)
+    print(str(acc_menu))
     if not act_valid:
         print("Invalid action. Please try again.")
 
