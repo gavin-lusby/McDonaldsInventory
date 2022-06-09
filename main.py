@@ -74,11 +74,15 @@ def start_menu():
             this_inv, this_subdiv = create_new_item(userName)
             csvo.setInv(this_inv)
             csvo.overwriteSubdivs(this_subdiv)
-        elif act == "4":
-            check_stock(userName)
+        elif act == "4" and manager_check(userName, valid_accs) == True:
+            this_inv, this_subdiv = remove_item(userName)
+            csvo.setInv(this_inv)
+            csvo.overwriteSubdivs(this_subdiv)
         elif act == "5":
-            csvo.setInv(remove_from_inventory(userName))
+            check_stock(userName)
         elif act == "6":
+            csvo.setInv(remove_from_inventory(userName))
+        elif act == "7":
             item_help()
         elif act == "exit":
             exit_menu()
@@ -102,7 +106,7 @@ if __name__ == "__main__":
     from resetScreen import reset_screen
     from itemHelp import item_help
     import csvo
-    from createNewItem import create_new_item
+    from createNewItem import create_new_item, remove_item
 
     # Importing from inventory.csv to create list of inventory units_by_product
 
