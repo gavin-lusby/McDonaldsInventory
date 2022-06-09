@@ -7,7 +7,7 @@ works - in list
 
 2. Access Code (any input vaild)
 
-works, hass dif message  - correct for user
+works, has dif message  - correct for user
 works  - incorrect for user
 
 3. New Shipment
