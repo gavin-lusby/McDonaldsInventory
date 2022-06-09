@@ -14,6 +14,7 @@ def start_menu():
   
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
       reader = csv.reader(f)
+
       for userAcc in list(reader):
           valid_accs[userAcc[0].upper()] = [userAcc[1],userAcc[2]]
 
@@ -58,16 +59,23 @@ def start_menu():
     while True:
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True
-        if act == "1":
+
+        # Manager-only functions
+        emp_forbid = ["1","2"]
+
+        # Ensures only managers can access manager-only functions
+        if manager_check(userName,valid_accs) == False and act in emp_forbid:
+            print("Sorry, employees cannot access this function.")
+        elif act == "1" and manager_check(userName,valid_accs) == True:
             csvo.setInv(add_to_inventory(userName))
-        elif act == "2":
+        elif act == "2" and manager_check(userName,valid_accs) == True:
             csvo.setInv(recalib_inventory(userName))
         elif act == "3":
             check_stock(userName,valid_accs)
         elif act == "4":
             csvo.setInv(remove_from_inventory(userName))
         elif act == "5":
-            manager_check()
+            manager_check(userName,valid_accs)
           
         elif act == "exit":
             exit_menu()
