@@ -4,8 +4,10 @@
 # Edited by Katie, Gavin (2022-05-24)
 # Edited by Katie (2022-05-30)
 # Edited by Katie, Gavin (2022-05-31)
+
 import fetchParams
 from csvo import get_inv
+from fetchParams import fetch_item_grps
 from resetScreen import reset_screen
 
 
@@ -15,7 +17,7 @@ def recalib_inventory(userName):
     print(f"Welcome, {userName}")
 
     curr_inv = get_inv()  # Fetches current inventory
-    changes = fetchparams.fetch_item_grps("counted")
+    changes = fetchParams.fetch_item_grps("counted")
     for item in list(changes):
         curr_inv[item] = changes[item]
 
@@ -27,7 +29,7 @@ def remove_from_inventory(userName):
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {userName}")
     curr_inv = get_inv()  # Fetches current inventory
-    changes = fetchparams.fetch_item_grps("removed/consumed")
+    changes = fetchParams.fetch_item_grps("removed/consumed")
     for item in list(changes):
         this_change = curr_inv[item] - changes[item]
         if this_change < 0:

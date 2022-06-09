@@ -58,6 +58,7 @@ def start_menu():
     # Clears the screen to prevent passwords from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
+    manager_status = manager_check(userName, valid_accs)
 
     # Calls on appropriate function for user's desired action
 
@@ -66,15 +67,15 @@ def start_menu():
         act_valid = True
 
         # Ensures only managers can access manager-only functions
-        if act == "1" and manager_check(userName, valid_accs) == True:
+        if act == "1" and manager_status:
             csvo.set_inv(add_to_inventory(userName))
-        elif act == "2" and manager_check(userName, valid_accs) == True:
+        elif act == "2" and manager_status:
             csvo.set_inv(recalib_inventory(userName))
-        elif act == "3" and manager_check(userName, valid_accs) == True:
+        elif act == "3" and manager_status:
             this_inv, this_subdiv = create_new_item(userName)
             csvo.set_inv(this_inv)
             csvo.set_subdivs(this_subdiv)
-        elif act == "4" and manager_check(userName, valid_accs) == True:
+        elif act == "4" and manager_status:
             this_inv, this_subdiv = remove_item(userName)
             csvo.set_inv(this_inv)
             csvo.set_subdivs(this_subdiv)
@@ -83,6 +84,8 @@ def start_menu():
         elif act == "6":
             csvo.set_inv(remove_from_inventory(userName))
         elif act == "7":
+            acc_menu(manager_status)
+        elif act == "8":
             item_help()
         elif act == "exit":
             exit_menu()
@@ -92,7 +95,7 @@ def start_menu():
         print(menus["funclist"])
         if not act_valid:
             print("Invalid action. Please try again.")
-
+          
 
 # Only runs main if main is being run directly
 if __name__ == "__main__":
@@ -101,7 +104,7 @@ if __name__ == "__main__":
     # Import functions used
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
-    from accFuncts import manager_check
+    from accFuncts import manager_check, acc_menu
     from exitMenu import exit_menu
     from resetScreen import reset_screen
     from itemHelp import item_help

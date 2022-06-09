@@ -1,5 +1,9 @@
+# accFuncts is short for Account Functions
+from exitMenu import exit_menu
 from os import path as ospath
+from resetScreen import reset_screen
 from sys import path as syspath
+
 
 # This function creates user accounts ("accs") of two types: manager accounts and employee accounts (which both have different levels of access to certain functionalities within the program)
 
@@ -15,20 +19,48 @@ for menuLine in list(reader):
 
 
 def manager_check(userName, valid_accs):
-    # Checks if user is a manager or not (user is an employee) and provides access to the accordingly appropriate functions
+    # Checks if user is a manager or an employee)
     if valid_accs[userName][0] == "manager":
         return True
-
     else:
         return False
 
 
-def print_menu(userName, valid_accs):
-    if manager_check(userName, valid_accs) == True:
-        print(acc_menus_lst[0])  # Prints manager-access actions
+def acc_menu(manager_status):
+    # Prints menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
+  if manager_status == True:
+      acc_menu = acc_menus_lst[0]
+  else:
+      acc_menu = acc_menus_lst[1]
+
+
+  # Allows user to enter menu items allowed based on their status as a manager or employee
+  while True:
+    act = input("SELECT AN ACTION: ").strip()
+    act_valid = True
+
+    # Ensures only managers can access manager-only functions
+    if act == "1" == True:
+        change_pass()
+    elif act == "2" and manager_status:
+        create_acc()
+    elif act == "3" and manager_status:
+        delete_acc()
+    elif act == "exit":
+        exit_menu()
     else:
-        print(acc_menus_lst[1])  # Prints employee-access actions
+        act_valid = False
+    reset_screen(False)
+    print(acc_menu)
+    if not act_valid:
+        print("Invalid action. Please try again.")
 
 
-def employee_menu():
+def change_pass():
+    pass
+
+def create_acc():
+    pass
+  
+def delete_acc():
     pass
