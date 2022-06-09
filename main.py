@@ -9,7 +9,9 @@ from sys import path as syspath
 # Runs for entire program; main piece of program
 
 def start_menu():
-    # Imports dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or employee, value #2 = user's password)
+    from passHash import hash_file
+  
+    # Creates dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or employee, value #2 = user's password)
     valid_accs = {}
   
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
@@ -18,6 +20,9 @@ def start_menu():
       for userAcc in list(reader):
           valid_accs[userAcc[0].upper()] = [userAcc[1],userAcc[2]]
 
+    valid_accs.sort()
+    hash_file(valid_accs)
+  
     userName = None
     userPass = None
 
