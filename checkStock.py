@@ -8,13 +8,13 @@ from resetScreen import reset_screen
 
 
 def printout(item, curr_inv):
-    cons, grps = csvo.grpToConGrp(item, curr_inv[item])
-    print(f"There are {cons} {csvo.fetchUBP()[item][2]} worth of {item} and {grps} {csvo.fetchUBP()[item][3]} worth "
-          f"of {item}  ({csvo.grpToUse(item, curr_inv[item])} uses).")
+    cons, grps = csvo.grp_to_con_grp(item, curr_inv[item])
+    print(f"There are {cons} {csvo.get_subdivs()[item][2]} worth of {item} and {grps} {csvo.get_subdivs()[item][3]} worth "
+          f"of {item}  ({csvo.grp_to_use(item, curr_inv[item])} uses).")
 
 
 def check_stock(user_name):
-    curr_inv = csvo.getInv()
+    curr_inv = csvo.get_inv()
     list_of_items = []
     reset_screen(True)  # resets screen with return to menu suggestion
     print(f"Welcome, {user_name}")

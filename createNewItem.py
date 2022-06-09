@@ -12,12 +12,12 @@ def return_to_menu(checksave, a, b, c, d):
         return [c, d]
 
 
-# Modified version of ask_item_cons_grps from fetchparams.py
+# Modified version of ask_item_cons_grps from fetchParams.py
 def ask_item_cons_grps(item_name, cons, grps):
     while True:
         uses_per_grp = input(f"How many uses of {item_name} are in each {grps}?: ").strip()
         if uses_per_grp == "exit":
-            if csvo.checkIfSave():
+            if csvo.check_if_save():
                 return ["exit", True]
             else:
                 return ["exit", False]
@@ -30,7 +30,7 @@ def ask_item_cons_grps(item_name, cons, grps):
     while True:
         grps_per_con = input(f"How many {grps} of {item_name} are in each {cons}?: ").strip()
         if grps_per_con == "exit":
-            if csvo.checkIfSave():
+            if csvo.check_if_save():
                 return ["exit", True]
             else:
                 return ["exit", False]
@@ -45,9 +45,9 @@ def ask_item_cons_grps(item_name, cons, grps):
 
 def create_new_item(user_name):
     resetScreen.reset_screen(True)  # resets screen with return to menu suggestion
-    curr_inv = csvo.getInv()
+    curr_inv = csvo.get_inv()
     new_inv = dict(curr_inv)  # copy of curr_inv
-    subdivs = csvo.fetchUBP()
+    subdivs = csvo.get_subdivs()
     new_subdivs = dict(subdivs)  # copy of subdivs
     print(f"Welcome, {user_name}")
     print("Please ensure you have read and understand help menu prompt before continuing here. If not type\n"
@@ -59,7 +59,7 @@ def create_new_item(user_name):
                          "(plural): ").lower().strip()
 
         if new_item == "exit":
-            return return_to_menu(csvo.checkIfSave(), new_inv, new_subdivs, curr_inv, subdivs)
+            return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
         elif new_item == "all" or new_item == "":
             print("Invalid name. Please try again.")
@@ -82,7 +82,7 @@ def create_new_item(user_name):
                     break
 
             if con_name == "exit":
-                return return_to_menu(csvo.checkIfSave(), new_inv, new_subdivs, curr_inv, subdivs)
+                return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
             while True:
                 grp_name = input("What is the name of one group of this item (ie \"bag(s)\") with "
@@ -95,7 +95,7 @@ def create_new_item(user_name):
                     break
 
             if grp_name == "exit":
-                return return_to_menu(csvo.checkIfSave(), new_inv, new_subdivs, curr_inv, subdivs)
+                return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
             uses_grps_cons = ask_item_cons_grps(new_item, con_name, grp_name)
 
             if uses_grps_cons[0] == "exit":
@@ -108,9 +108,9 @@ def create_new_item(user_name):
 
 def remove_item(user_name) :
     resetScreen.reset_screen(True)  # resets screen with return to menu suggestion
-    curr_inv = csvo.getInv()
+    curr_inv = csvo.get_inv()
     new_inv = dict(curr_inv)  # copy of curr_inv
-    subdivs = csvo.fetchUBP()
+    subdivs = csvo.get_subdivs()
     new_subdivs = dict(subdivs)  # copy of subdivs
     print(f"Welcome, {user_name}")
     while True:
@@ -118,7 +118,7 @@ def remove_item(user_name) :
                          "(plural): ").lower().strip()
 
         if removing_item == "exit":
-            return return_to_menu(csvo.checkIfSave(), new_inv, new_subdivs, curr_inv, subdivs)
+            return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
         elif removing_item in new_subdivs:
             print(f"Removal of  {removing_item} recorded.")

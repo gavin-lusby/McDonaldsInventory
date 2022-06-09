@@ -11,7 +11,7 @@ a list that is stored as the value associated with that key. The number values g
 """
 
 
-def fetchUBP():
+def get_subdivs():
     unit_by_product = {}
     with open(ospath.join(syspath[0], "subdivs.csv"), 'r') as f:
         reader = csv.reader(f)
@@ -21,9 +21,9 @@ def fetchUBP():
 
 
 # Overwrites subdivs.csv and updated UBP
-def overwriteSubdivs(new_UBP):
+def set_subdivs(new_UBP):
     # Checks if changes would be redundant before making them
-    if new_UBP != fetchUBP():
+    if new_UBP != get_subdivs():
         with open(ospath.join(syspath[0], "subdivs.csv"), 'w', newline="") as f:
             writer = csv.writer(f)
             temp_subdivs_as_list = []
@@ -41,7 +41,7 @@ def overwriteSubdivs(new_UBP):
 
 
 # Fetches current inventory data and stores as dict in form of <product name> : <num of uses>
-def getInv():
+def get_inv():
     products = {}
     with open(ospath.join(syspath[0], "inventory.csv"), 'r') as f:
         reader = csv.reader(f)
@@ -53,9 +53,9 @@ def getInv():
 
 # Updates inventory stored in CSV to match the inventory stored in memory (since changes will be made to the
 # memory-stored one by the users) Format of inventory.csv: "buns,300"
-def setInv(updated_inv):
+def set_inv(updated_inv):
     # Checks if changes would be redundant before making them
-    if updated_inv != getInv():
+    if updated_inv != get_inv():
         with open(ospath.join(syspath[0], "inventory.csv"), 'w', newline="") as f:
             writer = csv.writer(f)
             temp_inv_as_list = []
@@ -72,25 +72,25 @@ def setInv(updated_inv):
 
 # returns num of containers and groups of product
 # Example input: ("nuggets", 105), example output : [10,5]
-def grpToConGrp(product_name, groups):
-    ubp = fetchUBP()
+def grp_to_con_grp(product_name, groups):
+    ubp = get_subdivs()
     return [groups // ubp[product_name][0], groups % ubp[product_name][0]]
 
 
 # returns num of groups of product
 # Example input: ("nuggets", 10), example output : 100
-def conToGrp(product_name, cons):
-    return cons * fetchUBP()[product_name][0]
+def con_to_grp(product_name, cons):
+    return cons * get_subdivs()[product_name][0]
 
 
 # returns num of uses of product
-def grpToUse(product_name, groups):
-    return groups * fetchUBP()[product_name][1]
+def grp_to_use(product_name, groups):
+    return groups * get_subdivs()[product_name][1]
 
 
 # Check if the user has chosen to save (returns True) or not (returns False)
 # This is used to determine whether changes to csv's will be made
-def checkIfSave():
+def check_if_save():
     while True:
         save_bool = input("Do you want to save changes? (y/n): ").lower().strip()
         if save_bool == "n":

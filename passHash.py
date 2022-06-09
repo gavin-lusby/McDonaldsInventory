@@ -4,7 +4,7 @@ import csv
 import hashlib
 
 
-def accFileUpdate(valid_accs):
+def acc_file_update(valid_accs):
     # Updates users.csv with the hashed passwords so they are not stored in plain text
     
     with open(os.path.join(sys.path[0], "users.csv"), 'w', newline="") as r:
@@ -18,4 +18,4 @@ def hash_file(valid_accs):
         newHash = hashlib.sha512((valid_accs[user][1]).encode()).hexdigest()
         valid_accs[user][1] = newHash
 
-    accFileUpdate(valid_accs)
+    acc_file_update(valid_accs)

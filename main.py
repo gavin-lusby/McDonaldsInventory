@@ -67,21 +67,21 @@ def start_menu():
 
         # Ensures only managers can access manager-only functions
         if act == "1" and manager_check(userName, valid_accs) == True:
-            csvo.setInv(add_to_inventory(userName))
+            csvo.set_inv(add_to_inventory(userName))
         elif act == "2" and manager_check(userName, valid_accs) == True:
-            csvo.setInv(recalib_inventory(userName))
+            csvo.set_inv(recalib_inventory(userName))
         elif act == "3" and manager_check(userName, valid_accs) == True:
             this_inv, this_subdiv = create_new_item(userName)
-            csvo.setInv(this_inv)
-            csvo.overwriteSubdivs(this_subdiv)
+            csvo.set_inv(this_inv)
+            csvo.set_subdivs(this_subdiv)
         elif act == "4" and manager_check(userName, valid_accs) == True:
             this_inv, this_subdiv = remove_item(userName)
-            csvo.setInv(this_inv)
-            csvo.overwriteSubdivs(this_subdiv)
+            csvo.set_inv(this_inv)
+            csvo.set_subdivs(this_subdiv)
         elif act == "5":
             check_stock(userName)
         elif act == "6":
-            csvo.setInv(remove_from_inventory(userName))
+            csvo.set_inv(remove_from_inventory(userName))
         elif act == "7":
             item_help()
         elif act == "exit":
