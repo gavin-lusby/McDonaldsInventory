@@ -1,1 +1,9 @@
 2022 - 06 - 09
+
+1.  
+
+ - large
+ - decimal
+ - string
+ - negative
+ - propper

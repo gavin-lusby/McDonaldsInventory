@@ -23,7 +23,7 @@ def manager_check(userName, valid_accs):
         return False
 
 
-def print_menu():
+def print_menu(userName, valid_accs):
     if manager_check(userName, valid_accs) == True:
         print(acc_menus_lst[0])  # Prints manager-access actions
     else:
