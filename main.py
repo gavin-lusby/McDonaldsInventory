@@ -38,7 +38,7 @@ def start_menu():
         print("Invalid name, please try again.")
 
     # Keep looping until user's password is valid, or "exit" is chosen
-    while userPass != valid_accs.get(userName):
+    while userPass != valid_accs.get(userName)[1]:
         # Exits program if exit option chosen
         if userPass == "exit":
             exit_menu()
@@ -67,7 +67,7 @@ def start_menu():
         elif act == "2" and manager_check(userName,valid_accs) == True:
             csvo.setInv(recalib_inventory(userName))
         elif act == "3":
-            check_stock(userName,valid_accs)
+            check_stock()
         elif act == "4":
             csvo.setInv(remove_from_inventory(userName))
         elif act == "5":

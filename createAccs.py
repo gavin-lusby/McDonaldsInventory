@@ -18,7 +18,7 @@ for menuLine in list(reader):
 
 def manager_check(userName,valid_accs):
     # Checks if user is a manager or not (user is an employee) and provides access to the accordingly appropriate functions
-    if valid_accs[userName][1] == "manager":
+    if valid_accs[userName][0] == "manager":
       return True
 
     else:
