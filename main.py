@@ -19,8 +19,8 @@ def start_menu():
         for user_acc in list(reader):
             valid_accs[user_acc[0].upper()] = [user_acc[1], user_acc[2]]
 
-    # Hashes all passwords
-    hash_file(valid_accs)
+    # Hashes all passwords (note: hash_file is a one-time run function)
+    #hash_file(valid_accs)
 
     user_name = None
     user_pass = ""
@@ -48,7 +48,7 @@ def start_menu():
         if user_pass == "exit":
             exit_menu()
         reset_screen(False)
-        if user_pass is not "":  # Makes sure this code doesn't run the first time, only subsequent times
+        if user_pass != "":  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
         user_pass = str(input("Please enter your password correctly (case-sensitive): "))
 

@@ -55,8 +55,7 @@ def create_new_item(user_name):
 
     while True:
 
-        new_item = input("Please enter the name of the new item you would like to add to inventory"
-                         "(plural): ").lower().strip()
+        new_item = input("\nPlease enter the name of the new item you would like to add to inventory\n(plural): ").lower().strip()
 
         if new_item == "exit":
             return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)

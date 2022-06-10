@@ -6,6 +6,7 @@ import hashlib
 
 def hash_file(valid_accs):
   # Hashes each user's password
+  # Only run once to properly hash passwords already in users.csv from program development (see hidden.txt), not including newly-added accounts by user
     for user in valid_accs.keys():
         newHash = hashlib.sha512((valid_accs[user][1]).encode()).hexdigest()
         valid_accs[user][1] = newHash

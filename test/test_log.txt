@@ -1,32 +1,40 @@
 2022 - 06 - 09
 
-1. User Name (any input valid)
+User Name (any input valid)
+  - accets whatever but must be in list
 
-works but should have some other message, confusing  - not in list
-works - in list
-
-2. Access Code (any input vaild)
+Access Code (any input vaild)
 
 works, has dif message  - correct for user
 works  - incorrect for user
 
-3. New Shipment
-  - can only uploade for items in dict
-  - numbers can only be positive integers (string negative and deciaml did not work)
+New Shipment / Recalibrate Inventory
+  - can only input items in dict
+  - numbers can only be positive integers
   - handles large and small numbers
 
-4. Recalibrate Inventory
-  see 3
+  works
 
-5. Create New Item
+Create New Item
   
-  
+  any string is viable for item name and grp/container name do we want this?
+  also text looks weird, i dont know if thats glitch but reloading page doesnt help
+  numbers/special characters are allowed in item name and grp/count
+  no string length limit
 
+  amounts must be positive integer, no limit to size
+  no number size max
+  number can be 0
 
-6. Check Stock
+Check Stock
+  - only allows items in list
 
-7. Remove From Inventory
+  works
 
-8. Help - works
+Remove From Inventory
 
-20. Manager vs Employee
+  works
+
+Help 
+
+  works

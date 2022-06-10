@@ -65,8 +65,9 @@ def acc_menu(manager_status):
           print("Invalid action. Please try again.")
 
 
-def write_users_csv():
-    print
+def write_users_csv(change):
+    # Writes to users.csv
+  f.write(change)
 
 
 def change_pass():
@@ -74,7 +75,55 @@ def change_pass():
 
 
 def create_acc():
-    print("Test create_acc")
+    new_acc = []
+    new_status = ""
+
+    # Creates new user's username
+    while True:
+      new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
+
+      if new_status == "y":
+        new_status = True
+        break
+      elif new_status == "n":
+        new_status = False
+        break
+      else:
+        print("Invalid response.")
+  
+    # Allows user to enter manager/employee status
+    while True:
+      new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
+
+      if new_status == "y":
+        new_status = True
+        break
+      elif new_status == "n":
+        new_status = False
+        break
+      else:
+        print("Invalid response.")
+
+      # Creates new user's password
+      while True:
+        new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
+  
+        if new_status == "y":
+          new_status = True
+          break
+        elif new_status == "n":
+          new_status = False
+          break
+        else:
+          print("Invalid response.")
+          
+    new_name = str(input("FULL NAME: "))
+    
+    
+    # Writes new user (name, status, and password to users.csv)
+    write_users_csv([new_name,new_status,new_pass])
+    print(f"User {user_name} saved.")
+
 
 
 def delete_acc():
