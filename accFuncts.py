@@ -93,13 +93,17 @@ def create_acc(valid_accs):
             new_acc.append(new_name)
   
             # Asks user to choose manager status
-            if create_acc_status(valid_accs, new_acc) != None:
-                if create_acc_pass(valid_accs, new_acc) != None:
+            create_status = create_acc_status(valid_accs, new_acc)
+            if create_status != None:
+                create_pass = create_acc_pass(valid_accs, new_acc)
+              
+                if create_pass != None:
                     # Writes new user (name, status, and password to users.csv)
-                    valid_accs[new_name] = [create_acc_status(valid_accs, new_acc), create_acc_pass(valid_accs, new_acc)]
+                    valid_accs[new_name] = [create_status, create_pass]
                     acc_file_update(valid_accs)
                   
-                    print(f"{create_acc_status(valid_accs, new_acc)} {new_name} saved.")
+                    print(f"{create_status} {new_name} saved.")
+                    reset_screen(True)
                 else:
                   input("Create new account cancelled. Press enter to continue.")
                   reset_screen(True)
@@ -133,8 +137,7 @@ def create_acc_status(valid_accs, new_acc):
         if check_if_save():
             input("Status changes saved. Press enter to continue.")
             new_acc.append(new_status)
-            return [new_status]
-            break
+            return new_status
           
         else:
             return None
@@ -149,8 +152,7 @@ def create_acc_pass(valid_accs, new_acc):
             input("Password changes saved. Press enter to continue.")
             new_pass = hash_pass(new_pass)
             new_acc.append(new_pass)
-            return[]
-            break
+            return new_pass
       
         else:
             return None
