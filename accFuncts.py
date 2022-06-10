@@ -37,7 +37,7 @@ def print_menu(manager_status):
         print(acc_menus_lst[0])
 
 
-def acc_menu(manager_status, valid_accs):
+def acc_menu(manager_status, user_name, valid_accs):
 
     # Initial menu print
     reset_screen(False)
@@ -50,11 +50,11 @@ def acc_menu(manager_status, valid_accs):
   
       # Ensures only managers can access manager-only functions
       if act == "1":
-          change_pass()
+          change_pass(valid_accs, user_name)
       elif act == "2" and manager_status:
           create_acc(valid_accs)
       elif act == "3" and manager_status:
-          delete_acc()
+          delete_acc(valid_accs)
       elif act == "exit":
           reset_screen(True)
           break
@@ -68,11 +68,44 @@ def acc_menu(manager_status, valid_accs):
           print("Invalid action. Please try again.")
 
 
-def change_pass():
-    #change_pass = input(str(""))
+def change_pass(valid_accs, user_name):
+    # Allows users to change their account password if they know their current password
+        # Saves all hashed current passwords in list passes
+    passes = []
+    for user in valid_accs:
+        passes.append(valid_accs[user][1])
 
-    #acc_file_update
-    pass
+  
+    current_pass = str(input("Enter current password: "))
+    if current_pass.lower().strip() == "exit":
+        input("Password change cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
+
+    # Can only change correct current passwords
+    while hash_pass(current_pass) not in passes:
+        print("Incorrect current password.")
+        current_pass = str(input("Correctly enter current password: "))
+
+        if current_pass.lower().strip() == "exit":
+            input("Password change cancelled. Press enter to continue.")
+            reset_screen(True)
+            return
+    
+    changed_pass = str(input("Enter new password (case-sensitive): "))
+    
+    # Changes user's password if changes have been saved
+    if check_if_save():
+        input("Password change has been saved. Press enter to continue.")
+        valid_accs[user_name][1] = hash_pass(changed_pass)
+        acc_file_update(valid_accs)
+      
+        reset_screen(True)
+        return
+    else:
+        input("Password change cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
 
 
 def create_acc(valid_accs):
@@ -81,12 +114,21 @@ def create_acc(valid_accs):
     # Creates new user's username
     while True:
         new_name = str(input("Enter full name: ")).upper().strip()
+        if new_name == "EXIT":
+            input("Create new account cancelled. Press enter to continue.")
+            reset_screen(True)
+            break
   
         # Prevents multiple accounts under the same name
         while new_name in valid_accs:
-            print ("This user already exists. Please try again or type \"exit\".")
-            new_name = str(input("Enter full name: ")).upper().strip()
-  
+            new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper().strip()
+
+            if new_name == "EXIT":
+                input("Create new account cancelled. Press enter to continue.")
+                reset_screen(True)
+                break
+
+          
         # User can choose to re-enter username as many times as they would like
         if check_if_save():
             input("Username changes saved. Press enter to continue.")
@@ -128,7 +170,8 @@ def create_acc_status(valid_accs, new_acc):
             new_status = "manager"
         elif new_status == "n":
             new_status = "employee"
-
+        elif new_status == "exit":
+            return None
         else:
           print("Invalid response.")
 
@@ -147,6 +190,9 @@ def create_acc_pass(valid_accs, new_acc):
     # Creates new user's password
     while True:
         new_pass = str(input("Enter password (case-sensitive): "))
+
+        if new_pass.lower().strip() == "exit":
+            return None
         
         if check_if_save():
             input("Password changes saved. Press enter to continue.")
@@ -158,5 +204,34 @@ def create_acc_pass(valid_accs, new_acc):
             return None
 
 
-def delete_acc():
-    print("Test delete_acc")
+def delete_acc(valid_accs):
+    # Removes a key:value pair from the dictionary valid_accs
+    remove_acc = str(input("Enter the full name of the user whose account you would like to remove: ")).upper().strip()
+
+    if remove_acc == "EXIT":
+        input("Delete account cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
+
+    # Can only remove existing users
+    while remove_acc not in valid_accs:
+        remove_acc = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper().strip()
+  
+        if remove_acc == "EXIT":
+            input("Delete account cancelled. Press enter to continue.")
+            reset_screen(True)
+            return
+
+    # Deletes the user if changes have been saved
+    if check_if_save():
+        input(f"{remove_acc} has been deleted. Press enter to continue.")
+        del valid_accs[remove_acc]
+        acc_file_update(valid_accs)
+      
+        reset_screen(True)
+        return
+    
+    else:
+        input("Delete account cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
