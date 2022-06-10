@@ -1,2 +1,2 @@
-\n---- ACCOUNT SETTINGS MENU ---\n------ 1. Change Password ------
-\n----- 2. Create New Account ----\n----- 3. Delete An Account -----
+------- ACCOUNT SETTINGS MENU ------\n-------- 1. Change Password --------
+------ 2. Create New Account -------\n------- 3. Delete An Account -------\n

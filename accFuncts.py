@@ -13,10 +13,9 @@ acc_menus_lst = []
 
 with open(ospath.join(syspath[0], "accMenus.txt"), 'r') as f:
     reader = f.read().splitlines()
-
+  
 for menuLine in list(reader):
-    acc_menus_lst.append(menuLine)
-
+    acc_menus_lst.append(menuLine.replace('\\n', '\n'))
 
 def manager_check(userName, valid_accs):
     # Checks if user is a manager or an employee)
@@ -28,39 +27,48 @@ def manager_check(userName, valid_accs):
 
 def acc_menu(manager_status):
     # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
-  if manager_status == True:
-      acc_menu = acc_menus_lst[0]
-  else:
-      acc_menu = acc_menus_lst[1]
-
-
-  # Allows user to enter menu items allowed based on their status as a manager or employee
-  while True:
-    act = input("SELECT AN ACTION: ").strip()
-    act_valid = True
-
-    # Ensures only managers can access manager-only functions
-    if act == "1" == True:
-        change_pass()
-    elif act == "2" and manager_status:
-        create_acc()
-    elif act == "3" and manager_status:
-        delete_acc()
-    elif act == "exit":
-        exit_menu()
+    
+    if manager_status == True:
+        for line in range(len(acc_menus_lst)):
+          print(acc_menus_lst[line])
     else:
-        act_valid = False
-    reset_screen(False)
-    print(str(acc_menu))
-    if not act_valid:
-        print("Invalid action. Please try again.")
+        print(acc_menus_lst[0])
+    
+    reset_screen(True)
+    
+    # Allows user to enter menu items allowed based on their status as a manager or employee
+    while True:
+      act = input("SELECT AN ACTION: ").strip()
+      act_valid = True
+  
+      # Ensures only managers can access manager-only functions
+      if act == "1":
+          change_pass()
+      elif act == "2" and manager_status:
+          create_acc()
+      elif act == "3" and manager_status:
+          delete_acc()
+      elif act == "exit":
+          exit_menu()
+      else:
+          act_valid = False
+        
+      reset_screen(False)
+  
+      for line in range(len(print_menu)-1):
+        print(f"{print_menu[line]}")
+      
+      if not act_valid:
+          print("Invalid action. Please try again.")
 
 
 def change_pass():
-    pass
+    print("Test change_pass")
+
 
 def create_acc():
-    pass
-  
+    print("Test create_acc")
+
+
 def delete_acc():
-    pass
+    print("Test delete_acc")

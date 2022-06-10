@@ -91,8 +91,11 @@ def start_menu():
             exit_menu()
         else:
             act_valid = False
+          
         reset_screen(False)
+        
         print(menus["funclist"])
+        
         if not act_valid:
             print("Invalid action. Please try again.")
           

@@ -8,7 +8,7 @@
 
 # GENERAL PROGRAMMING NOTES
 
-# --> We've noticed some bugs in the console output (presumably because some of the program was coded in PyCharm and some in Replit). The code itself should be fine; if you encounter weird bugs in the console print statements, reloading and running the program again should fix the issue.
+# --> We've noticed some bugs in the console output (presumably because some of the program was coded in PyCharm and some in Replit). The code itself should be fine; if you encounter weird bugs in the console print statements, refreshing Replit and then running the program again should fix the issue.
 
 # --> subdivs.csv does not get modified by the program. It should only be edited manually when adding new products.
 
