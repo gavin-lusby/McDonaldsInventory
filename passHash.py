@@ -13,17 +13,15 @@ def hash_file(valid_accs):
     acc_file_update(valid_accs)
 
   
-def acc_file_update(valid_accs, user_name):
+def acc_file_update(valid_accs):
     valid_accs_csv = []
-    valid_user_csv = []
   
-    for users in valid_accs:
-        valid_accs_csv.append(f"{user_name},{user_status},{password}")
-  
+    for user in valid_accs:
+        valid_accs_csv.append([user, valid_accs[user][0], valid_accs[user][1]])
+
+    valid_accs_csv.sort()
+      
     # Updates users.csv with the hashed passwords so they are not stored in plain text
-    
     with open(os.path.join(sys.path[0], "users.csv"), 'w', newline="") as r:
         writer = csv.writer(r)
-
-        for users in valid_accs:
-            writer.writerows(valid_accs)
+        writer.writerows(valid_accs_csv)

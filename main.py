@@ -16,13 +16,14 @@ def start_menu():
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
         reader = csv.reader(f)
 
-        for userAcc in list(reader):
-            valid_accs[userAcc[0].upper()] = [userAcc[1], userAcc[2]]
+        for user_acc in list(reader):
+            valid_accs[user_acc[0].upper()] = [user_acc[1], user_acc[2]]
 
-    # hash_file(valid_accs)
+    # Hashes all passwords
+    hash_file(valid_accs)
 
     user_name = None
-    user_pass = None
+    user_pass = ""
 
     # Keep looping until user's full name is valid, or "exit" is chosen user_name is stored in all uppercase as
     # case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their
@@ -42,12 +43,12 @@ def start_menu():
         print("Invalid name. Please try again.")
 
     # Keep looping until user's password is valid, or "exit" is chosen
-    while user_pass != valid_accs.get(user_name)[1]:
+    while hashlib.sha512(user_pass.encode()).hexdigest() != valid_accs.get(user_name)[1]:
         # Exits program if exit option chosen
         if user_pass == "exit":
             exit_menu()
         reset_screen(False)
-        if user_pass is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+        if user_pass is not "":  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
         user_pass = str(input("Please enter your password correctly (case-sensitive): "))
 
@@ -101,13 +102,17 @@ def start_menu():
 
 # Only runs main if main is being run directly
 if __name__ == "__main__":
-    import sys
+    # Import libraries used
+    import hashlib
     import os
+    import sys
+  
     # Import functions used
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
     from accFuncts import manager_check, acc_menu
     from exitMenu import exit_menu
+    from passHash import hash_file
     from resetScreen import reset_screen
     from itemHelp import item_help
     import csvo
