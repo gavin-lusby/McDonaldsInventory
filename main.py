@@ -19,38 +19,37 @@ def start_menu():
         for userAcc in list(reader):
             valid_accs[userAcc[0].upper()] = [userAcc[1], userAcc[2]]
 
-    # valid_accs.sort()
     # hash_file(valid_accs)
 
-    userName = None
-    userPass = None
+    user_name = None
+    user_pass = None
 
-    # Keep looping until user's full name is valid, or "exit" is chosen userName is stored in all uppercase as
+    # Keep looping until user's full name is valid, or "exit" is chosen user_name is stored in all uppercase as
     # case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their
     # full name
-    while userName not in valid_accs:
+    while user_name not in valid_accs:
         reset_screen(False)
-        userName = str(input("Please enter your full name correctly: ")).upper()
+        user_name = str(input("Please enter your full name correctly: ")).upper()
 
         # Exits program if exit option chosen
-        if userName == "EXIT":
+        if user_name == "EXIT":
             exit_menu()
         reset_screen(False)
-        if userName is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+        if user_name is not None:  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid name. Please try again.")
 
         reset_screen(False)
         print("Invalid name. Please try again.")
 
     # Keep looping until user's password is valid, or "exit" is chosen
-    while userPass != valid_accs.get(userName)[1]:
+    while user_pass != valid_accs.get(user_name)[1]:
         # Exits program if exit option chosen
-        if userPass == "exit":
+        if user_pass == "exit":
             exit_menu()
         reset_screen(False)
-        if userPass is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+        if user_pass is not None:  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
-        userPass = str(input("Please enter your password correctly (case-sensitive): "))
+        user_pass = str(input("Please enter your password correctly (case-sensitive): "))
 
         reset_screen(False)
         print("Invalid password. Please try again.")
@@ -59,7 +58,7 @@ def start_menu():
     reset_screen(False)
     print(menus["funclist"])
   
-    manager_status = manager_check(userName, valid_accs)
+    manager_status = manager_check(user_name, valid_accs)
 
     # Calls on appropriate function for user's desired action
 
@@ -69,21 +68,21 @@ def start_menu():
 
         # Ensures only managers can access manager-only functions
         if act == "1" and manager_status:
-            csvo.set_inv(add_to_inventory(userName))
+            csvo.set_inv(add_to_inventory(user_name))
         elif act == "2" and manager_status:
-            csvo.set_inv(recalib_inventory(userName))
+            csvo.set_inv(recalib_inventory(user_name))
         elif act == "3" and manager_status:
-            this_inv, this_subdiv = create_new_item(userName)
+            this_inv, this_subdiv = create_new_item(user_name)
             csvo.set_inv(this_inv)
             csvo.set_subdivs(this_subdiv)
         elif act == "4" and manager_status:
-            this_inv, this_subdiv = remove_item(userName)
+            this_inv, this_subdiv = remove_item(user_name)
             csvo.set_inv(this_inv)
             csvo.set_subdivs(this_subdiv)
         elif act == "5":
-            check_stock(userName)
+            check_stock(user_name)
         elif act == "6":
-            csvo.set_inv(remove_from_inventory(userName))
+            csvo.set_inv(remove_from_inventory(user_name))
         elif act == "7":
             acc_menu(manager_status)
         elif act == "8":

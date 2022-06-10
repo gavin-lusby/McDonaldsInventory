@@ -66,11 +66,11 @@ def acc_menu(manager_status):
 
 
 def write_userscsv():
-    
+    print
 
 
 def change_pass():
-    new_pass = input(str(""))
+   new_pass = input(str(""))
 
 
 def create_acc():
