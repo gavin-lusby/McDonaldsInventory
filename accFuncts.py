@@ -71,8 +71,27 @@ def acc_menu(manager_status, user_name, valid_accs):
 
 
 def change_pass(manager_status, user_name, valid_accs):
-    # Allows account passwords to be changed
+    # This function allows account passwords to be changed
+    # Sidenote: We, the developers, unanimously agree that it's annoying when you forget your current password, then attempt to change your password and get hit with an error message telling you that your new password cannot be your current password (we're all a little forgetful sometimes). Thus, we did not include this annoying feature, we hope you can understand.
 
+    # Allows users to change their account (or another account's, in the case of managers making the password changes) password if they know their account's current password
+    current_pass = str(input("Enter your account's current password: "))
+    if current_pass.lower().strip() == "exit":
+        input("Password change cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
+
+    # Users can only change an account's password if they know their own account's password (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
+    while hash_pass(current_pass) != valid_accs[user_name][1]:
+        print("Incorrect current password.")
+        current_pass = str(input("Correctly enter current password: "))
+
+        if current_pass.lower().strip() == "exit":
+            input("Password change cancelled. Press enter to continue.")
+            reset_screen(True)
+            return
+
+  
     # Managers can change their account password or the passwords of anyone else's account
     if manager_status:
         user_name = str(input("Enter the full name of the user who's password you would like to change: ")).upper()
@@ -91,29 +110,10 @@ def change_pass(manager_status, user_name, valid_accs):
             reset_screen(True)
             return
     
-      
-    # Allows users to change their account password if they know their current password
-    # For manager or employee use
-    current_pass = str(input("Enter your account's current password: "))
-    if current_pass.lower().strip() == "exit":
-        input("Password change cancelled. Press enter to continue.")
-        reset_screen(True)
-        return
-
-    # Can only change correct current passwords (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
-    while hash_pass(current_pass) != valid_accs[user_name][1]:
-        print("Incorrect current password.")
-        current_pass = str(input("Correctly enter current password: "))
-
-        if current_pass.lower().strip() == "exit":
-            input("Password change cancelled. Press enter to continue.")
-            reset_screen(True)
-            return
-    
     changed_pass = ""
   
     while changed_pass.strip() == "":
-        print("Password must be a .")
+        print("Password cannot just be whitespace; must contain other characters.")
         changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
     
     # Changes user's password if changes have been saved
@@ -137,27 +137,20 @@ def create_acc(valid_accs):
   
     # Creates new user's username
     while True:
-        new_name = ""
+        
+        new_name = input('Enter full name of new account holder. Should contain letters and a space between first, middle and/or last names.').upper()
 
         # Prevents multiple accounts under the same name, and name being white space
-        while new_name.strip() == "" or ():
-            print("Name cannot just be whitespace; should contain letters and a space between first, middle and/or last names.")
-            new_name = str(input("Enter full name: ")).upper()
-        
+        while new_name.strip() == "" or (new_name in valid_accs):
+            if new_name.strip() == "":
+                new_name = str(input("Name cannot be just whitespace. Enter full name: ")).upper()
+            elif new_name in valid_accs:
+                new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper()
+      
         if new_name == "EXIT":
             input("Create new account cancelled. Press enter to continue.")
             reset_screen(True)
             break
-  
-        
-        while new_name in valid_accs:
-            new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper()
-
-            if new_name == "EXIT":
-                input("Create new account cancelled. Press enter to continue.")
-                reset_screen(True)
-                break
-
           
         # User can choose to re-enter username as many times as they would like
         if check_if_save():

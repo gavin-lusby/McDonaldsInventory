@@ -45,7 +45,7 @@ Change password
   - can change anyones as manager
 
 New Account
-  - prompts for save changes on every step
+  - prompts for save changes on every step. FINE
   - loops
   - doesnt let repeat users
   - passwords and users can be empty
