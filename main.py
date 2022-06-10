@@ -85,7 +85,7 @@ def start_menu():
         elif act == "6":
             csvo.set_inv(remove_from_inventory(user_name))
         elif act == "7":
-            acc_menu(manager_status)
+            acc_menu(manager_status, valid_accs)
         elif act == "8":
             item_help()
         elif act == "exit":

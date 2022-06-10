@@ -13,8 +13,15 @@ def hash_file(valid_accs):
 
     acc_file_update(valid_accs)
 
+
+def hash_pass(user_pass):
+    # Hashes a single password (used to create new passwords or change existing passwords)
+    newHash = hashlib.sha512(user_pass.encode()).hexdigest()
+    return newHash
+
   
 def acc_file_update(valid_accs):
+    # Re-writes all of users.csv with most recent list stored in valid_accs_csv
     valid_accs_csv = []
   
     for user in valid_accs:
