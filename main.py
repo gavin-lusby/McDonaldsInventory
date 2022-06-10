@@ -58,6 +58,7 @@ def start_menu():
     # Clears the screen to prevent passwords from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
+  
     manager_status = manager_check(userName, valid_accs)
 
     # Calls on appropriate function for user's desired action
@@ -93,7 +94,6 @@ def start_menu():
             act_valid = False
           
         reset_screen(False)
-        
         print(menus["funclist"])
         
         if not act_valid:

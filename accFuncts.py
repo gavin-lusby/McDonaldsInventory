@@ -25,16 +25,21 @@ def manager_check(userName, valid_accs):
         return False
 
 
-def acc_menu(manager_status):
-    # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
+def print_menu(manager_status):
+      # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
     
     if manager_status == True:
         for line in range(len(acc_menus_lst)):
           print(acc_menus_lst[line])
     else:
         print(acc_menus_lst[0])
-    
-    reset_screen(True)
+
+
+def acc_menu(manager_status):
+
+    # Initial menu print
+    reset_screen(False)
+    print_menu(manager_status)
     
     # Allows user to enter menu items allowed based on their status as a manager or employee
     while True:
@@ -54,16 +59,18 @@ def acc_menu(manager_status):
           act_valid = False
         
       reset_screen(False)
-  
-      for line in range(len(print_menu)-1):
-        print(f"{print_menu[line]}")
+      print_menu(manager_status)
       
       if not act_valid:
           print("Invalid action. Please try again.")
 
 
+def write_userscsv():
+    
+
+
 def change_pass():
-    print("Test change_pass")
+    new_pass = input(str(""))
 
 
 def create_acc():
