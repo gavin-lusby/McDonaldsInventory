@@ -13,12 +13,12 @@ def hash_file(valid_accs):
     acc_file_update(valid_accs)
 
   
-def acc_file_update(valid_accs, userName):
+def acc_file_update(valid_accs, user_name):
     valid_accs_csv = []
     valid_user_csv = []
   
     for users in valid_accs:
-        valid_accs_csv.append(f"{userName},{user_status},{password}")
+        valid_accs_csv.append(f"{user_name},{user_status},{password}")
   
     # Updates users.csv with the hashed passwords so they are not stored in plain text
     

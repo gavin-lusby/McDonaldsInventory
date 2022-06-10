@@ -17,9 +17,9 @@ with open(ospath.join(syspath[0], "accMenus.txt"), 'r') as f:
 for menuLine in list(reader):
     acc_menus_lst.append(menuLine.replace('\\n', '\n'))
 
-def manager_check(userName, valid_accs):
+def manager_check(user_name, valid_accs):
     # Checks if user is a manager or an employee)
-    if valid_accs[userName][0] == "manager":
+    if valid_accs[user_name][0] == "manager":
         return True
     else:
         return False
@@ -65,7 +65,7 @@ def acc_menu(manager_status):
           print("Invalid action. Please try again.")
 
 
-def write_userscsv():
+def write_users_csv():
     print
 
 
