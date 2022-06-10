@@ -1,5 +1,7 @@
+# This is a manual log and is not updated by the program. This file would not regularly be included in the project but is for the sake of testing
+
 Gavin Lusby,manager,manager123
-Isaac Bisutti,manager,manager124
+Isaac Bisutti,manager,BR0
 Katie Zhong,manager,manager125
 Mrs. Koopmans,manager,manager126
 Eugene Krabs,manager,manager127

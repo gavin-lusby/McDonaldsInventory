@@ -21,7 +21,9 @@ def ask_item_cons_grps(item_name, cons, grps):
                 return ["exit", True]
             else:
                 return ["exit", False]
-        if not uses_per_grp.isdigit():
+        if (not uses_per_grp.isdigit()):
+            print("Invalid integer amount. Please try again.")
+        elif int(uses_per_grp) == 0:
             print("Invalid integer amount. Please try again.")
         else:
             uses_per_grp = int(uses_per_grp)
@@ -35,6 +37,8 @@ def ask_item_cons_grps(item_name, cons, grps):
             else:
                 return ["exit", False]
         if not grps_per_con.isdigit():
+            print("Invalid integer amount. Please try again.")
+        elif int(grps_per_con) == 0:
             print("Invalid integer amount. Please try again.")
         else:
             grps_per_con = int(grps_per_con)
@@ -50,12 +54,11 @@ def create_new_item(user_name):
     subdivs = csvo.get_subdivs()
     new_subdivs = dict(subdivs)  # copy of subdivs
     print(f"Welcome, {user_name}")
-    print("Please ensure you have read and understand help menu prompt before continuing here. If not type\n"
-          "\"exit\" and then \"n\", then press enter, then type \"6\"")
+    print("Please ensure you have read and understand help menu prompt before continuing here. If not type\"exit\" and then \"n\", then press enter, then type \"6\"")
 
     while True:
 
-        new_item = input("\nPlease enter the name of the new item you would like to add to inventory\n(plural): ").lower().strip()
+        new_item = input("\nPlease enter the name of the new item you would like to add to inventory (plural): ").lower().strip()
 
         if new_item == "exit":
             return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
@@ -71,8 +74,7 @@ def create_new_item(user_name):
 
         else:
             while True:
-                con_name = input("What is the name of one container of this item (ie \"box(es)\") with singular/"
-                                 "plural: ").lower().strip()
+                con_name = input("What is the name of one container of this item with singular(plural), ie. \"box(es)\".) : ").lower().strip()
                 if len(con_name) < 4:
                     print("Name is too short.")
                 elif con_name.replace(' ', '').isnumeric():
@@ -84,8 +86,7 @@ def create_new_item(user_name):
                 return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
             while True:
-                grp_name = input("What is the name of one group of this item (ie \"bag(s)\") with "
-                                 "singular/plural: ").lower().strip()
+                grp_name = input("What is the name of one group of this item with singular(plural), ie. \"box(es)\".) : ").lower().strip()
                 if len(grp_name) < 4:
                     print("Name is too short.")
                 elif grp_name.replace(' ', '').isnumeric():

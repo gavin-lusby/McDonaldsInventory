@@ -14,9 +14,10 @@ def hash_file(valid_accs):
     acc_file_update(valid_accs)
 
 
-def hash_pass(user_pass):
+def hash_pass(user_pass,user_salt):
     # Hashes a single password (used to create new passwords or change existing passwords)
-    newHash = hashlib.sha512(user_pass.encode()).hexdigest()
+    unencrypted=user_salt+user_pass
+    newHash = hashlib.sha512(unencrypted.encode()).hexdigest()
     return newHash
 
   
@@ -33,3 +34,8 @@ def acc_file_update(valid_accs):
     with open(os.path.join(sys.path[0], "users.csv"), 'w', newline="") as r:
         writer = csv.writer(r)
         writer.writerows(valid_accs_csv)
+
+
+def generate_salt():
+    ./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+    

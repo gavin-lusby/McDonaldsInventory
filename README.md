@@ -17,3 +17,5 @@
 # --> The M333r GitHub account is Gavin (on the GitHub he made some commits from the wrong account)
 
 # --> hidden.txt isn't meant to be part of the program since the passwords aren't intended to be stored in plain text. The text file is just for the developers to keep track of the passwords so they can remember them and test the program.
+
+# --> A lot of our functions don't have return values so we couldn't really create testing functions that are based on those return values. Instead, Isaac created and kept track of manual testing in test_log.txt in the folder "test".

@@ -73,7 +73,7 @@ def change_pass(manager_status, user_name, valid_accs):
 
     # Managers can change their account password or the passwords of anyone else's account
     if manager_status:
-        user_name = input("Enter the full name of the user who's password you would like to change: ").upper()
+        user_name = str(input("Enter the full name of the user who's password you would like to change: ")).upper()
 
     if user_name == "EXIT":
         input("Change password cancelled. Press enter to continue.")
@@ -89,12 +89,6 @@ def change_pass(manager_status, user_name, valid_accs):
             reset_screen(True)
             return
     
-  
-    # Saves all hashed current passwords in list passes
-    passes = []
-    for user in valid_accs:
-        passes.append(valid_accs[user][1])
-    
       
     # Allows users to change their account password if they know their current password
     # For manager or employee use
@@ -105,7 +99,7 @@ def change_pass(manager_status, user_name, valid_accs):
         return
 
     # Can only change correct current passwords (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
-    while hash_pass(current_pass) not in passes:
+    while hash_pass(current_pass) != valid_accs[user_name][1]:
         print("Incorrect current password.")
         current_pass = str(input("Correctly enter current password: "))
 
@@ -114,7 +108,11 @@ def change_pass(manager_status, user_name, valid_accs):
             reset_screen(True)
             return
     
-    changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
+    changed_pass = ""
+  
+    while changed_pass.strip() == "":
+        print("Password must be a .")
+        changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
     
     # Changes user's password if changes have been saved
     if check_if_save():
@@ -135,7 +133,12 @@ def create_acc(valid_accs):
   
     # Creates new user's username
     while True:
-        new_name = str(input("Enter full name: ")).upper()
+        new_name = ""
+        
+        while new_name.strip() == "":
+            print("Name cannot just be whitespace; should contain letters and a space between first and middle and/or last names.")
+            new_name = str(input("Enter full name: ")).upper()
+        
         if new_name == "EXIT":
             input("Create new account cancelled. Press enter to continue.")
             reset_screen(True)
@@ -211,7 +214,10 @@ def create_acc_status(valid_accs, new_acc):
 def create_acc_pass(valid_accs, new_acc):
     # Creates new user's password
     while True:
-        new_pass = str(input("Enter password (case-sensitive): "))
+        new_pass = ""
+        while new_pass.strip() == "":
+            print("Password cannot just be whitespace; must contain other characters.")
+            new_pass = str(input("Enter password (case-sensitive): "))
 
         if new_pass.lower().strip() == "exit":
             return None
