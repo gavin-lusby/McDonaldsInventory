@@ -2,15 +2,15 @@
 from csvo import check_if_save
 from exitMenu import exit_menu
 from os import path as ospath
-from passHash import acc_file_update, hash_pass
+from passHash import acc_file_update, generate_salt, hash_pass
 from resetScreen import reset_screen
 from sys import path as syspath
 
 
-# This function creates user accounts ("accs") of two types: manager accounts and employee accounts (which both have different levels of access to certain functionalities within the program)
+# There are two types of user accounts ("accs"): manager accounts and employee accounts. Both have different levels of access to certain functionalities within the program
 
 
-# Saves account settings menus from accMenus.txt to a list
+# (Lines 14-20) Saves account settings menus from accMenus.txt to a list
 acc_menus_lst = []
 
 with open(ospath.join(syspath[0], "accMenus.txt"), 'r') as f:
@@ -19,8 +19,9 @@ with open(ospath.join(syspath[0], "accMenus.txt"), 'r') as f:
 for menuLine in list(reader):
     acc_menus_lst.append(menuLine.replace('\\n', '\n'))
 
+
 def manager_check(user_name, valid_accs):
-    # Checks if user is a manager or an employee)
+    # Checks if user is a manager or an employee
     if valid_accs[user_name][0] == "manager":
         return True
     else:
@@ -38,6 +39,7 @@ def print_menu(manager_status):
 
 
 def acc_menu(manager_status, user_name, valid_accs):
+    # This function prints and allows users to choose from the account settings menu according to their status as manager or employee
 
     # Initial menu print
     reset_screen(False)
@@ -54,7 +56,7 @@ def acc_menu(manager_status, user_name, valid_accs):
       elif act == "2" and manager_status:
           create_acc(valid_accs)
       elif act == "3" and manager_status:
-          delete_acc(valid_accs)
+          delete_acc(user_name, valid_accs)
       elif act == "exit":
           reset_screen(True)
           break
@@ -117,7 +119,9 @@ def change_pass(manager_status, user_name, valid_accs):
     # Changes user's password if changes have been saved
     if check_if_save():
         input("Password change has been saved. Press enter to continue.")
-        valid_accs[user_name][1] = hash_pass(changed_pass)
+        new_salt = generate_salt()
+        valid_accs[user_name][1] = hash_pass(changed_pass, new_salt)
+        valid_accs[user_name][2] = new_salt
         acc_file_update(valid_accs)
       
         reset_screen(True)
@@ -134,9 +138,10 @@ def create_acc(valid_accs):
     # Creates new user's username
     while True:
         new_name = ""
-        
-        while new_name.strip() == "":
-            print("Name cannot just be whitespace; should contain letters and a space between first and middle and/or last names.")
+
+        # Prevents multiple accounts under the same name, and name being white space
+        while new_name.strip() == "" or ():
+            print("Name cannot just be whitespace; should contain letters and a space between first, middle and/or last names.")
             new_name = str(input("Enter full name: ")).upper()
         
         if new_name == "EXIT":
@@ -144,7 +149,7 @@ def create_acc(valid_accs):
             reset_screen(True)
             break
   
-        # Prevents multiple accounts under the same name
+        
         while new_name in valid_accs:
             new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper()
 
@@ -224,7 +229,9 @@ def create_acc_pass(valid_accs, new_acc):
         
         if check_if_save():
             input("Password changes saved. Press enter to continue.")
+            new_salt = generate_salt
             new_pass = hash_pass(new_pass)
+            
             new_acc.append(new_pass)
             return new_pass
       
@@ -232,24 +239,28 @@ def create_acc_pass(valid_accs, new_acc):
             return None
 
 
-def delete_acc(valid_accs):
+def delete_acc(user_name, valid_accs):
     # Removes a key:value pair from the dictionary valid_accs
-    remove_acc = str(input("Enter the full name of the user whose account you would like to remove: ")).upper().strip()
+    remove_acc = str(input("Enter the full name of the user whose account you would like to remove: ")).upper()
 
     if remove_acc == "EXIT":
         input("Delete account cancelled. Press enter to continue.")
         reset_screen(True)
         return
 
-    # Can only remove existing users
-    while remove_acc not in valid_accs:
-        remove_acc = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper().strip()
-  
-        if remove_acc == "EXIT":
+    # Can only remove existing users and cannot remove self
+    while remove_acc not in valid_accs or remove_acc == user_name:
+        if remove_acc == user_name:
+            print("Cannot delete your own account. Please have another manager delete your account instead.")
+            remove_acc = str(input("Please enter the correct full name of another existing user whose account you would like to remove or type \"exit\": ")).upper()
+        elif remove_acc == "EXIT":
             input("Delete account cancelled. Press enter to continue.")
             reset_screen(True)
             return
+        elif remove_acc not in valid_accs:
+            remove_acc = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
 
+          
     # Deletes the user if changes have been saved
     if check_if_save():
         input(f"{remove_acc} has been deleted. Press enter to continue.")

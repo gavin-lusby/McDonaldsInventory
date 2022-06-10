@@ -17,7 +17,7 @@ def start_menu():
         reader = csv.reader(f)
 
         for user_acc in list(reader):
-            valid_accs[user_acc[0].upper()] = [user_acc[1], user_acc[2]]
+            valid_accs[user_acc[0].upper()] = [user_acc[1], user_acc[2], user_acc[3]]
 
     # Hashes all passwords (note: hash_file is a one-time run function)
     #hash_file(valid_accs)

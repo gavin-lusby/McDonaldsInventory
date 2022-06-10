@@ -19,13 +19,15 @@ New Shipment / Recalibrate Inventory
 
 Create New Item  
   - any string is viable for item name and grp/container name do we want this? YES
-  - also text looks weird, i dont know if thats glitch but reloading page doesnt help
+  - also text looks weird, i dont know if thats glitch but reloading page doesnt help. JUST A GLITCH
   - numbers/special characters are allowed in item name and grp/count. WE KNOW
   - no string length limit. FINE
 
   - amounts must be positive integer, no limit to size. FINE
   - no number size max. FINE
   - number can be 0 (causes issues in other places). FIXED
+
+  works 
 
 Check Stock
   - only allows items in list

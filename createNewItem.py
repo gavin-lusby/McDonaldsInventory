@@ -54,7 +54,7 @@ def create_new_item(user_name):
     subdivs = csvo.get_subdivs()
     new_subdivs = dict(subdivs)  # copy of subdivs
     print(f"Welcome, {user_name}")
-    print("Please ensure you have read and understand help menu prompt before continuing here. If not type\"exit\" and then \"n\", then press enter, then type \"6\"")
+    print("Please ensure you have read and understand help menu prompt before continuing here. If not navigate too \"HELP\" (input \"exit\" and then \"n\", then press enter, then input \"8\")")
 
     while True:
 
@@ -74,7 +74,7 @@ def create_new_item(user_name):
 
         else:
             while True:
-                con_name = input("What is the name of one container of this item with singular(plural), ie. \"box(es)\".) : ").lower().strip()
+                con_name = input("What is the name of one container of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
                 if len(con_name) < 4:
                     print("Name is too short.")
                 elif con_name.replace(' ', '').isnumeric():
@@ -86,7 +86,7 @@ def create_new_item(user_name):
                 return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
             while True:
-                grp_name = input("What is the name of one group of this item with singular(plural), ie. \"box(es)\".) : ").lower().strip()
+                grp_name = input("What is the name of one group of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
                 if len(grp_name) < 4:
                     print("Name is too short.")
                 elif grp_name.replace(' ', '').isnumeric():

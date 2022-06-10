@@ -2,7 +2,7 @@ import os
 import sys
 import csv
 import hashlib
-
+import random
 
 def hash_file(valid_accs):
   # Hashes each user's password
@@ -37,5 +37,6 @@ def acc_file_update(valid_accs):
 
 
 def generate_salt():
-    ./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+   return ''.join(random.sample('./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',16))
+    
     
