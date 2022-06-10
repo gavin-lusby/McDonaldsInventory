@@ -50,7 +50,7 @@ def acc_menu(manager_status, user_name, valid_accs):
   
       # Ensures only managers can access manager-only functions
       if act == "1":
-          change_pass(valid_accs, user_name)
+          change_pass(manager_status, user_name, valid_accs)
       elif act == "2" and manager_status:
           create_acc(valid_accs)
       elif act == "3" and manager_status:
@@ -68,21 +68,43 @@ def acc_menu(manager_status, user_name, valid_accs):
           print("Invalid action. Please try again.")
 
 
-def change_pass(valid_accs, user_name):
-    # Allows users to change their account password if they know their current password
-        # Saves all hashed current passwords in list passes
+def change_pass(manager_status, user_name, valid_accs):
+    # Allows account passwords to be changed
+
+    # Managers can change their account password or the passwords of anyone else's account
+    if manager_status:
+        user_name = input("Enter the full name of the user who's password you would like to change: ").upper()
+
+    if user_name == "EXIT":
+        input("Change password cancelled. Press enter to continue.")
+        reset_screen(True)
+        return
+
+    # Can only remove existing users
+    while user_name not in valid_accs:
+        user_name = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
+  
+        if user_name == "EXIT":
+            input("Change password cancelled. Press enter to continue.")
+            reset_screen(True)
+            return
+    
+  
+    # Saves all hashed current passwords in list passes
     passes = []
     for user in valid_accs:
         passes.append(valid_accs[user][1])
-
-  
-    current_pass = str(input("Enter current password: "))
+    
+      
+    # Allows users to change their account password if they know their current password
+    # For manager or employee use
+    current_pass = str(input("Enter your account's current password: "))
     if current_pass.lower().strip() == "exit":
         input("Password change cancelled. Press enter to continue.")
         reset_screen(True)
         return
 
-    # Can only change correct current passwords
+    # Can only change correct current passwords (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
     while hash_pass(current_pass) not in passes:
         print("Incorrect current password.")
         current_pass = str(input("Correctly enter current password: "))
@@ -92,7 +114,7 @@ def change_pass(valid_accs, user_name):
             reset_screen(True)
             return
     
-    changed_pass = str(input("Enter new password (case-sensitive): "))
+    changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
     
     # Changes user's password if changes have been saved
     if check_if_save():
@@ -113,7 +135,7 @@ def create_acc(valid_accs):
   
     # Creates new user's username
     while True:
-        new_name = str(input("Enter full name: ")).upper().strip()
+        new_name = str(input("Enter full name: ")).upper()
         if new_name == "EXIT":
             input("Create new account cancelled. Press enter to continue.")
             reset_screen(True)
@@ -121,7 +143,7 @@ def create_acc(valid_accs):
   
         # Prevents multiple accounts under the same name
         while new_name in valid_accs:
-            new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper().strip()
+            new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper()
 
             if new_name == "EXIT":
                 input("Create new account cancelled. Press enter to continue.")
