@@ -1,7 +1,8 @@
 # accFuncts is short for Account Functions
+from csvo import check_if_save
 from exitMenu import exit_menu
 from os import path as ospath
-from passHash import hash_pass
+from passHash import acc_file_update, hash_pass
 from resetScreen import reset_screen
 from sys import path as syspath
 
@@ -55,7 +56,8 @@ def acc_menu(manager_status, valid_accs):
       elif act == "3" and manager_status:
           delete_acc()
       elif act == "exit":
-          exit_menu()
+          reset_screen(True)
+          break
       else:
           act_valid = False
         
@@ -66,54 +68,92 @@ def acc_menu(manager_status, valid_accs):
           print("Invalid action. Please try again.")
 
 
-def write_users_csv(change):
-    # Writes to users.csv
-  f.write(change)
-
-
 def change_pass():
-   change_pass = input(str(""))
+    #change_pass = input(str(""))
+
+    #acc_file_update
+    pass
 
 
 def create_acc(valid_accs):
     new_acc = []
-    new_status = ""
-
   
     # Creates new user's username
-    new_name = str(input("Enter full name: ")).upper().strip()
-  
-    while new_name in valid_accs:
-        print ("This user already exists. Please try again or type \"exit\".")
+    while True:
         new_name = str(input("Enter full name: ")).upper().strip()
-      
-    new_acc.append(new_name)
-
   
+        # Prevents multiple accounts under the same name
+        while new_name in valid_accs:
+            print ("This user already exists. Please try again or type \"exit\".")
+            new_name = str(input("Enter full name: ")).upper().strip()
+  
+        # User can choose to re-enter username as many times as they would like
+        if check_if_save():
+            input("Username changes saved. Press enter to continue.")
+            new_acc.append(new_name)
+  
+            # Asks user to choose manager status
+            if create_acc_status(valid_accs, new_acc) != None:
+                if create_acc_pass(valid_accs, new_acc) != None:
+                    # Writes new user (name, status, and password to users.csv)
+                    valid_accs[new_name] = [create_acc_status(valid_accs, new_acc), create_acc_pass(valid_accs, new_acc)]
+                    acc_file_update(valid_accs)
+                  
+                    print(f"{create_acc_status(valid_accs, new_acc)} {new_name} saved.")
+                else:
+                  input("Create new account cancelled. Press enter to continue.")
+                  reset_screen(True)
+                  break
+            else:
+                input("Create new account cancelled. Press enter to continue.")
+                reset_screen(True)
+                break
+                  
+        else:
+            input("Create new account cancelled. Press enter to continue.")
+            reset_screen(True)
+            break
+
+      
+def create_acc_status(valid_accs, new_acc):
     # Allows user to enter manager/employee status
     while True:
         new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
   
         if new_status == "y":
-          new_status = "manager"
+            new_status = "manager"
         elif new_status == "n":
-          new_status = "employee"
+            new_status = "employee"
+
         else:
           print("Invalid response.")
-  
-        break
-    new_acc.append(new_status)
 
-  
+
+        # Checks if user would like to save changes
+        if check_if_save():
+            input("Status changes saved. Press enter to continue.")
+            new_acc.append(new_status)
+            return [new_status]
+            break
+          
+        else:
+            return None
+
+
+def create_acc_pass(valid_accs, new_acc):
     # Creates new user's password
-    new_pass = str(input("Enter password (case-sensitive): "))
-    new_pass = hash_pass(new_pass)
-    new_acc.append(new_pass)
-
-  
-    # Writes new user (name, status, and password to users.csv)
-    write_users_csv([new_name,new_status,new_pass])
-    print(f"{new_status} {new_name} saved.")
+    while True:
+        new_pass = str(input("Enter password (case-sensitive): "))
+        
+        if check_if_save():
+            input("Password changes saved. Press enter to continue.")
+            new_pass = hash_pass(new_pass)
+            new_acc.append(new_pass)
+            return[]
+            break
+      
+        else:
+            return None
 
 
 def delete_acc():
