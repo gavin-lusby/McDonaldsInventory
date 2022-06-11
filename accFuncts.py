@@ -143,8 +143,8 @@ def create_acc(valid_accs):
   
     # Creates new user's username
         
-    create_name = input('Enter full name of new account holder. Should '
-                        'contain letters and a space between first, middle and/or last names.').upper()
+    create_name = input('Enter full name of new account holder. Should contain '
+                        'letters and a space between first, middle and/or last names.').upper()
 
     # Prevents multiple accounts under the same name, and name being white space
     while create_name.strip() == "" or (create_name in valid_accs):
@@ -167,17 +167,25 @@ def create_acc(valid_accs):
         create_status = create_acc_status()
         new_acc.append(create_status)
       
-        if create_status != None:
-            create_pass = create_acc_pass()
+        if create_status is not None:
+            create_pass,create_salt = create_acc_pass()
             new_acc.append(create_pass)
               
-            if create_pass != None:
-                # Writes new user (name, status, and password to users.csv)
-                valid_accs[create_name] = [create_status, create_pass, generate_salt()]
-                acc_file_update(valid_accs)
+            if create_pass is not None:
+                if check_if_save():
+                    # Writes new user (name, status, and password to users.csv)
+                    valid_accs[create_name] = [create_status, create_pass, create_salt]
+                    acc_file_update(valid_accs)
                   
-                print(f"{create_status} {create_name} saved.")
-                reset_screen(True)
+                    input(f"{create_status} {create_name} saved.")
+                    reset_screen(True)
+                    pass
+                    # End of non-terminating function
+                    
+                else:
+                    input("\nCreate new account cancelled. Press enter to continue.")
+                    reset_screen(True)
+                    pass
             else:
                 input("\nCreate new account cancelled. Press enter to continue.")
                 reset_screen(True)
@@ -198,9 +206,9 @@ def create_acc_status():
         new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
   
         if new_status == "y":
-            new_status = "manager"
+            return "manager"
         elif new_status == "n":
-            new_status = "employee"
+            return "employee"
         elif new_status == "exit":
             return None
         else:
@@ -225,7 +233,7 @@ def create_acc_pass():
         new_salt = generate_salt()
         new_pass = hash_pass(new_pass, new_salt)
             
-        return new_pass
+        return [new_pass,new_salt]
 
 
 def delete_acc(user_name, valid_accs):
