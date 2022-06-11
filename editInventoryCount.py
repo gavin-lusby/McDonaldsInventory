@@ -7,14 +7,13 @@
 
 import fetchParams
 from csvo import get_inv
-from fetchParams import fetch_item_grps
 from resetScreen import reset_screen
 
 
 # For manager to recalibrate stock level values(in the case of employees negligence skewing stock numbers over time)
 def recalib_inventory(user_name):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {user_name}")
+    print(f"Welcome, {user_name}, setting current inventory.")
 
     curr_inv = get_inv()  # Fetches current inventory
     changes = fetchParams.fetch_item_grps("counted")
@@ -27,7 +26,7 @@ def recalib_inventory(user_name):
 # If employee is removing product from shelves, they document it here
 def remove_from_inventory(user_name):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {user_name}")
+    print(f"Welcome, {user_name}, removing used items from current stock.")
     curr_inv = get_inv()  # Fetches current inventory
     changes = fetchParams.fetch_item_grps("removed/consumed")
     for item in list(changes):
@@ -42,7 +41,7 @@ def remove_from_inventory(user_name):
 # For manager to document incoming shipment to add to stock levels(without the need to recount existing product)
 def add_to_inventory(user_name):
     reset_screen(True)  # resets screen with return to menu suggestion
-    print(f"Welcome, {user_name}")
+    print(f"Welcome, {user_name}, adding shipment to current stock.")
     curr_inv = get_inv()  # Fetches current inventory
     changes = fetchParams.fetch_item_grps("received")
     for item in list(changes):

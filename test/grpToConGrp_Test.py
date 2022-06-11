@@ -8,7 +8,7 @@
 
 
 import unittest
-from csvo import grp_to_con_grp()
+from csvo import grp_to_con_grp
 
 import random
 

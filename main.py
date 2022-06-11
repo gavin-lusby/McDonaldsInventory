@@ -66,7 +66,7 @@ def start_menu():
     manager_status = manager_check(user_name, valid_accs)
 
   
-    # (Lines 77-112) Calls on appropriate function for user's desired action according to the menu
+    # (Lines 77-105) Calls on appropriate function for user's desired action according to the menu
     while True:
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True

@@ -51,7 +51,7 @@ def fetch_item_grps(action_name):
     # function to determine what to do with these values(either add to, remove from, or set as stock level
 
     while True:
-        item_name = input(str(f"Enter \"all\" OR the plural name of one"
+        item_name = input(str(f"\nEnter \"all\" OR the plural name of one"
                               f" item {action_name} (ex. tomatoes): ")).lower().strip()
         if item_name == "all":
             if set(csvo.get_subdivs()) == set(changes):
