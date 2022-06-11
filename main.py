@@ -131,7 +131,7 @@ if __name__ == "__main__":
         enter because each "menu" should only take up one line"""
         for menu in f.read().splitlines():
             raw_menus.append(menu.replace('\\n', '\n'))
-    menus = {"header": raw_menus[0], "funclist": raw_menus[1], "accmenus": raw_menus[2]}
+    menus = {"header": raw_menus[0], "funclist": raw_menus[1]}
 
     # Run program
     start_menu()
