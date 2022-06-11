@@ -142,9 +142,8 @@ def create_acc(valid_accs):
     new_acc = []
   
     # Creates new user's username
-        
     create_name = input('Enter full name of new account holder. Should contain '
-                        'letters and a space between first, middle and/or last names.').upper()
+                        'letters and a space between first, middle and/or last names: ').upper()
 
     # Prevents multiple accounts under the same name, and name being white space
     while create_name.strip() == "" or (create_name in valid_accs):
@@ -159,8 +158,7 @@ def create_acc(valid_accs):
         pass
           
     # User can choose to re-enter username as many times as they would like
-    if True:
-        input("\nUsername changes saved. Press enter to continue.")
+    else:
         new_acc.append(create_name)
   
         # Asks user to choose manager status
@@ -177,7 +175,7 @@ def create_acc(valid_accs):
                     valid_accs[create_name] = [create_status, create_pass, create_salt]
                     acc_file_update(valid_accs)
                   
-                    input(f"{create_status} {create_name} saved.")
+                    input(f"\nNew user {create_status} {create_name} saved.")
                     reset_screen(True)
                     pass
                     # End of non-terminating function
@@ -186,19 +184,16 @@ def create_acc(valid_accs):
                     input("\nCreate new account cancelled. Press enter to continue.")
                     reset_screen(True)
                     pass
+            
             else:
                 input("\nCreate new account cancelled. Press enter to continue.")
                 reset_screen(True)
                 pass
+        
         else:
             input("\nCreate new account cancelled. Press enter to continue.")
             reset_screen(True)
             pass
-                  
-    else:
-        input("\nCreate new account cancelled. Press enter to continue.")
-        reset_screen(True)
-        pass
       
 def create_acc_status():
     # Allows user to enter manager/employee status
@@ -227,9 +222,8 @@ def create_acc_pass():
             new_pass = str(input("Enter password (case-sensitive): "))
 
         if new_pass.lower().strip() == "exit":
-            return None
-        
-        input("\nPassword changes saved. Press enter to continue.")
+            return None,None
+
         new_salt = generate_salt()
         new_pass = hash_pass(new_pass, new_salt)
             

@@ -26,24 +26,19 @@ def start_menu():
     user_pass = ""
 
   
-    # (Lines 32-64) Keep looping until user's full name is valid, or "exit" is chosen
+    # (Lines 31-62) Keep looping until user's full name is valid, or "exit" is chosen
     # Note: user_name is stored in all uppercase as case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their full name
+    reset_screen(False)
+    user_name = str(input("Please enter your full name correctly: ")).upper()
+  
     while user_name not in valid_accs:
         reset_screen(False)
+        print("Invalid name. Please try again.")
         user_name = str(input("Please enter your full name correctly: ")).upper()
     
         # Exits program if exit option chosen
         if user_name == "EXIT":
             exit_menu()
-          
-        reset_screen(False)
-      
-        # Ensures Lines 46-47 don't run the first time the user's name is inputted, only subsequent times
-        if user_name is not None:  
-            print("Invalid name. Please try again.")
-
-        reset_screen(False)
-        print("Invalid name. Please try again.")
 
       
     # Keeps looping until user's password is valid (valid if equivalent to the stored hashed password) or "exit" is chosen
