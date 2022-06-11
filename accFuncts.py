@@ -142,38 +142,41 @@ def create_acc(valid_accs):
     new_acc = []
   
     # Creates new user's username
-    #while True:
         
-    new_name = input('Enter full name of new account holder. Should contain letters and a space between first, middle and/or last names.').upper()
+    create_name = input('Enter full name of new account holder. Should '
+                        'contain letters and a space between first, middle and/or last names.').upper()
 
     # Prevents multiple accounts under the same name, and name being white space
-    while new_name.strip() == "" or (new_name in valid_accs):
-        if new_name.strip() == "":
-            new_name = str(input("\nName cannot be just whitespace. Enter full name: ")).upper()
-        elif new_name in valid_accs:
-            new_name = str(input("\nThis user already exists. Enter new user's full name or type \"exit\": ")).upper()
+    while create_name.strip() == "" or (create_name in valid_accs):
+        if create_name.strip() == "":
+            create_name = str(input("\nName cannot be just whitespace. Enter full name: ")).upper()
+        elif create_name in valid_accs:
+            create_name = str(input("\nThis user already exists. Enter new user's full name or type \"exit\": ")).upper()
       
-    if new_name == "EXIT":
+    if create_name == "EXIT":
         input("\nCreate new account cancelled. Press enter to continue.")
         reset_screen(True)
         pass
           
     # User can choose to re-enter username as many times as they would like
-    if check_if_save():
+    if True:
         input("\nUsername changes saved. Press enter to continue.")
-        new_acc.append(new_name)
+        new_acc.append(create_name)
   
         # Asks user to choose manager status
-        create_status = create_acc_status(valid_accs, new_acc)
+        create_status = create_acc_status()
+        new_acc.append(create_status)
+      
         if create_status != None:
-            create_pass = create_acc_pass(valid_accs, new_acc)
+            create_pass = create_acc_pass()
+            new_acc.append(create_pass)
               
             if create_pass != None:
                 # Writes new user (name, status, and password to users.csv)
-                valid_accs[new_name] = [create_status, create_pass, generate_salt()]
+                valid_accs[create_name] = [create_status, create_pass, generate_salt()]
                 acc_file_update(valid_accs)
                   
-                print(f"{create_status} {new_name} saved.")
+                print(f"{create_status} {create_name} saved.")
                 reset_screen(True)
             else:
                 input("\nCreate new account cancelled. Press enter to continue.")
@@ -189,7 +192,7 @@ def create_acc(valid_accs):
         reset_screen(True)
         pass
       
-def create_acc_status(valid_accs, new_acc):
+def create_acc_status():
     # Allows user to enter manager/employee status
     while True:
         new_status = str(input("Is this user a manager? (y/n): ")).lower().strip()
@@ -204,17 +207,7 @@ def create_acc_status(valid_accs, new_acc):
           print("\nInvalid response.")
 
 
-        # Checks if user would like to save changes
-        if check_if_save():
-            input("\nStatus changes saved. Press enter to continue.")
-            new_acc.append(new_status)
-            return new_status
-          
-        else:
-            return None
-
-
-def create_acc_pass(valid_accs, new_acc):
+def create_acc_pass():
     # Note: Appended to new_acc so changes can be made to users.csv, in addition to returning values from new_acc or None (this allows us to check if the user has saved changes or not at every step)
   
     # Creates new user's password
@@ -228,16 +221,11 @@ def create_acc_pass(valid_accs, new_acc):
         if new_pass.lower().strip() == "exit":
             return None
         
-        if check_if_save():
-            input("\nPassword changes saved. Press enter to continue.")
-            new_salt = generate_salt()
-            new_pass = hash_pass(new_pass, new_salt)
+        input("\nPassword changes saved. Press enter to continue.")
+        new_salt = generate_salt()
+        new_pass = hash_pass(new_pass, new_salt)
             
-            new_acc.append(new_pass)
-            return new_pass
-      
-        else:
-            return None
+        return new_pass
 
 
 def delete_acc(user_name, valid_accs):

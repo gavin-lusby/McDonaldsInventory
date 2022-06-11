@@ -24,7 +24,6 @@ def start_menu():
   
     user_name = None
     user_pass = ""
-    user_pass_salted = ""
 
   
     # (Lines 32-64) Keep looping until user's full name is valid, or "exit" is chosen
@@ -48,7 +47,7 @@ def start_menu():
 
       
     # Keeps looping until user's password is valid (valid if equivalent to the stored hashed password) or "exit" is chosen
-    while hashlib.sha512(user_pass_salted.encode()).hexdigest() != valid_accs.get(user_name)[1]:
+    while hash_pass(user_pass,valid_accs.get(user_name)[2]) != valid_accs.get(user_name)[1]:
         # Exits program if exit option chosen
         if user_pass == "exit":
             exit_menu()
@@ -58,7 +57,6 @@ def start_menu():
         if user_pass != "":  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
         user_pass = str(input("Please enter your password correctly (case-sensitive): "))
-        user_pass_salted = valid_accs.get(user_name)[2] + user_pass # prepends user salt to password before verifying
 
         reset_screen(False)
         print("Invalid password. Please try again.")
@@ -115,7 +113,6 @@ def start_menu():
 # Only runs main if main is being run directly
 if __name__ == "__main__":
     # Imports libraries used
-    import hashlib
     import os
     import sys
   
@@ -124,7 +121,7 @@ if __name__ == "__main__":
     from checkStock import check_stock
     from accFuncts import manager_check, acc_menu
     from exitMenu import exit_menu
-    from passHash import hash_file
+    from passHash import hash_pass
     from resetScreen import reset_screen
     from itemHelp import item_help
     import csvo
