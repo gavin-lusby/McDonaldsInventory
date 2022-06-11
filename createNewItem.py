@@ -54,11 +54,14 @@ def create_new_item(user_name):
     subdivs = csvo.get_subdivs()
     new_subdivs = dict(subdivs)  # copy of subdivs
     print(f"Welcome, {user_name}")
-    print("Please ensure you have read and understand help menu prompt before continuing here. If not navigate too \"HELP\" (input \"exit\" and then \"n\", then press enter, then input \"8\")")
+    print(
+        "Please ensure you have read and understand help menu prompt before continuing here. If not navigate too "
+        "\"HELP\" (input \"exit\" and then \"n\", then press enter, then input \"8\")")
 
     while True:
 
-        new_item = input("\nPlease enter the name of the new item you would like to add to inventory (plural): ").lower().strip()
+        new_item = input(
+            "\nPlease enter the name of the new item you would like to add to inventory (plural): ").lower().strip()
 
         if new_item == "exit":
             return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
@@ -74,7 +77,8 @@ def create_new_item(user_name):
 
         else:
             while True:
-                con_name = input("What is the name of one container of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
+                con_name = input(
+                    "What is the name of one container of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
                 if len(con_name) < 4:
                     print("Name is too short.")
                 elif con_name.replace(' ', '').isnumeric():
@@ -86,7 +90,8 @@ def create_new_item(user_name):
                 return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
 
             while True:
-                grp_name = input("What is the name of one group of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
+                grp_name = input(
+                    "What is the name of one group of this item with singular(plural), ie. \"box(es)\": ").lower().strip()
                 if len(grp_name) < 4:
                     print("Name is too short.")
                 elif grp_name.replace(' ', '').isnumeric():
@@ -106,7 +111,8 @@ def create_new_item(user_name):
             print(f"{new_item} has been recorded with 0 {con_name} and 0 {grp_name}. Exit, save, and recalibrate"
                   f" to adjust values.")
 
-def remove_item(user_name) :
+
+def remove_item(user_name):
     resetScreen.reset_screen(True)  # resets screen with return to menu suggestion
     curr_inv = csvo.get_inv()
     new_inv = dict(curr_inv)  # copy of curr_inv
@@ -115,7 +121,7 @@ def remove_item(user_name) :
     print(f"Welcome, {user_name}")
     while True:
         removing_item = input("Please enter the name of the new item you would like to add to inventory"
-                         "(plural): ").lower().strip()
+                              "(plural): ").lower().strip()
 
         if removing_item == "exit":
             return return_to_menu(csvo.check_if_save(), new_inv, new_subdivs, curr_inv, subdivs)
@@ -126,4 +132,3 @@ def remove_item(user_name) :
             del new_inv[removing_item]
         else:
             print("Invalid name. Please try again.")
-            

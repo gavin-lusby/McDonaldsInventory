@@ -7,7 +7,9 @@
 # Purpose: Create a comprehensive inventory software for McDonald's employees and managers to use
 
 #------------------------------------------------------------------------------------
+
 # GROUP PROJECT MANAGEMENT GOOGLE DRIVE FOLDER: https://drive.google.com/drive/folders/18KgQ-VdjpkSVuHXrb-W9Lw-e5VEdC70J
+
 # Includes: Kanban, group MVP + extras outline, meeting notes/recordings
 
 # GENERAL PROGRAMMING NOTES
