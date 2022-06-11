@@ -1,16 +1,15 @@
 # Please see readme.md file for notes! :)
 
+# Imports necessary libraries
 import csv
 from os import path as ospath
 from sys import path as syspath
 
 
-# Starting menu
-# Runs for entire program; main piece of program
-
 def start_menu():
-    # Creates dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or
-    # employee, value #2 = user's password)
+    # This function prints and creates the start_menu that runs for the entire program (this is the main piece of the program)
+  
+    # (Lines 13-20) Creates dictionary of valid access accounts from users.csv (key = user's full name, value #1 = manager or employee, value #2 = user's password)
     valid_accs = {}
 
     with open(ospath.join(syspath[0], "users.csv"), 'r') as f:
@@ -19,19 +18,20 @@ def start_menu():
         for user_acc in list(reader):
             valid_accs[user_acc[0].upper()] = [user_acc[1], user_acc[2], user_acc[3]]
 
-    # Hashes all passwords (note: hash_file is a one-time run function)
+    # (Line 22) Hashes all passwords (note: hash_file is a one-time run function; it's commented out below because we've already used it to hash the passwords)
     #hash_file(valid_accs)
 
     user_name = None
     user_pass = ""
+    user_pass_salted = ""
 
-    # Keep looping until user's full name is valid, or "exit" is chosen user_name is stored in all uppercase as
-    # case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their
-    # full name
+  
+    # (Lines 29-) Keep looping until user's full name is valid, or "exit" is chosen
+    # Note: user_name is stored in all uppercase as case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their full name
     while user_name not in valid_accs:
         reset_screen(False)
         user_name = str(input("Please enter your full name correctly: ")).upper()
-
+    
         # Exits program if exit option chosen
         if user_name == "EXIT":
             exit_menu()
@@ -41,9 +41,9 @@ def start_menu():
 
         reset_screen(False)
         print("Invalid name. Please try again.")
-
-    # Keep looping until user's password is valid, or "exit" is chosen
-    while hashlib.sha512(user_pass.encode()).hexdigest() != valid_accs.get(user_name)[1]:
+      
+    # Keeps looping until user's password is valid (equivalent to the stored hashed password) or "exit" is chosen
+    while hashlib.sha512(user_pass_salted.encode()).hexdigest() != valid_accs.get(user_name)[1]:
         # Exits program if exit option chosen
         if user_pass == "exit":
             exit_menu()
@@ -51,6 +51,7 @@ def start_menu():
         if user_pass != "":  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
         user_pass = str(input("Please enter your password correctly (case-sensitive): "))
+        user_pass_salted = valid_accs.get(user_name)[2] + user_pass # prepends user salt to password before verifying
 
         reset_screen(False)
         print("Invalid password. Please try again.")

@@ -67,7 +67,7 @@ def acc_menu(manager_status, user_name, valid_accs):
       print_menu(manager_status)
       
       if not act_valid:
-          print("Invalid action. Please try again.")
+          print("\nInvalid action. Please try again.")
 
 
 def change_pass(manager_status, user_name, valid_accs):
@@ -77,17 +77,19 @@ def change_pass(manager_status, user_name, valid_accs):
     # Allows users to change their account (or another account's, in the case of managers making the password changes) password if they know their account's current password
     current_pass = str(input("Enter your account's current password: "))
     if current_pass.lower().strip() == "exit":
-        input("Password change cancelled. Press enter to continue.")
+        input("\nPassword change cancelled. Press enter to continue.")
         reset_screen(True)
         return
+        
+    user_salt = valid_accs[user_name][2]
 
     # Users can only change an account's password if they know their own account's password (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
-    while hash_pass(current_pass) != valid_accs[user_name][1]:
-        print("Incorrect current password.")
+    while hash_pass(current_pass, user_salt) != valid_accs[user_name][1]:
+        print("\nIncorrect current password.")
         current_pass = str(input("Correctly enter current password: "))
 
         if current_pass.lower().strip() == "exit":
-            input("Password change cancelled. Press enter to continue.")
+            input("\nPassword change cancelled. Press enter to continue.")
             reset_screen(True)
             return
 
@@ -97,28 +99,28 @@ def change_pass(manager_status, user_name, valid_accs):
         user_name = str(input("Enter the full name of the user who's password you would like to change: ")).upper()
 
     if user_name == "EXIT":
-        input("Change password cancelled. Press enter to continue.")
+        input("\nChange password cancelled. Press enter to continue.")
         reset_screen(True)
         return
 
     # Can only remove existing users
     while user_name not in valid_accs:
-        user_name = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
+        user_name = str(input("\nThis user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
   
         if user_name == "EXIT":
-            input("Change password cancelled. Press enter to continue.")
+            input("\nChange password cancelled. Press enter to continue.")
             reset_screen(True)
             return
     
-    changed_pass = ""
+    changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
   
     while changed_pass.strip() == "":
-        print("Password cannot just be whitespace; must contain other characters.")
+        print("\nPassword cannot just be whitespace; must contain other characters.")
         changed_pass = str(input("Enter new password for the password change (case-sensitive): "))
     
     # Changes user's password if changes have been saved
     if check_if_save():
-        input("Password change has been saved. Press enter to continue.")
+        input("\nPassword change has been saved. Press enter to continue.")
         new_salt = generate_salt()
         valid_accs[user_name][1] = hash_pass(changed_pass, new_salt)
         valid_accs[user_name][2] = new_salt
@@ -127,7 +129,7 @@ def change_pass(manager_status, user_name, valid_accs):
         reset_screen(True)
         return
     else:
-        input("Password change cancelled. Press enter to continue.")
+        input("\nPassword change cancelled. Press enter to continue.")
         reset_screen(True)
         return
 
@@ -143,18 +145,18 @@ def create_acc(valid_accs):
         # Prevents multiple accounts under the same name, and name being white space
         while new_name.strip() == "" or (new_name in valid_accs):
             if new_name.strip() == "":
-                new_name = str(input("Name cannot be just whitespace. Enter full name: ")).upper()
+                new_name = str(input("\nName cannot be just whitespace. Enter full name: ")).upper()
             elif new_name in valid_accs:
-                new_name = str(input("This user already exists. Enter new user's full name or type \"exit\": ")).upper()
+                new_name = str(input("\nThis user already exists. Enter new user's full name or type \"exit\": ")).upper()
       
         if new_name == "EXIT":
-            input("Create new account cancelled. Press enter to continue.")
+            input("\nCreate new account cancelled. Press enter to continue.")
             reset_screen(True)
             break
           
         # User can choose to re-enter username as many times as they would like
         if check_if_save():
-            input("Username changes saved. Press enter to continue.")
+            input("\nUsername changes saved. Press enter to continue.")
             new_acc.append(new_name)
   
             # Asks user to choose manager status
@@ -164,22 +166,22 @@ def create_acc(valid_accs):
               
                 if create_pass != None:
                     # Writes new user (name, status, and password to users.csv)
-                    valid_accs[new_name] = [create_status, create_pass]
+                    valid_accs[new_name] = [create_status, create_pass,generate_salt()]
                     acc_file_update(valid_accs)
                   
                     print(f"{create_status} {new_name} saved.")
                     reset_screen(True)
                 else:
-                  input("Create new account cancelled. Press enter to continue.")
+                  input("\nCreate new account cancelled. Press enter to continue.")
                   reset_screen(True)
                   break
             else:
-                input("Create new account cancelled. Press enter to continue.")
+                input("\nCreate new account cancelled. Press enter to continue.")
                 reset_screen(True)
                 break
                   
         else:
-            input("Create new account cancelled. Press enter to continue.")
+            input("\nCreate new account cancelled. Press enter to continue.")
             reset_screen(True)
             break
 
@@ -196,12 +198,12 @@ def create_acc_status(valid_accs, new_acc):
         elif new_status == "exit":
             return None
         else:
-          print("Invalid response.")
+          print("\nInvalid response.")
 
 
         # Checks if user would like to save changes
         if check_if_save():
-            input("Status changes saved. Press enter to continue.")
+            input("\nStatus changes saved. Press enter to continue.")
             new_acc.append(new_status)
             return new_status
           
@@ -212,18 +214,19 @@ def create_acc_status(valid_accs, new_acc):
 def create_acc_pass(valid_accs, new_acc):
     # Creates new user's password
     while True:
-        new_pass = ""
+        new_pass = str(input("Enter password (case-sensitive): "))
+      
         while new_pass.strip() == "":
-            print("Password cannot just be whitespace; must contain other characters.")
+            print("\nPassword cannot just be whitespace; must contain other characters.")
             new_pass = str(input("Enter password (case-sensitive): "))
 
         if new_pass.lower().strip() == "exit":
             return None
         
         if check_if_save():
-            input("Password changes saved. Press enter to continue.")
-            new_salt = generate_salt
-            new_pass = hash_pass(new_pass)
+            input("\nPassword changes saved. Press enter to continue.")
+            new_salt = generate_salt()
+            new_pass = hash_pass(new_pass, new_salt)
             
             new_acc.append(new_pass)
             return new_pass
@@ -237,21 +240,21 @@ def delete_acc(user_name, valid_accs):
     remove_acc = str(input("Enter the full name of the user whose account you would like to remove: ")).upper()
 
     if remove_acc == "EXIT":
-        input("Delete account cancelled. Press enter to continue.")
+        input("\nDelete account cancelled. Press enter to continue.")
         reset_screen(True)
         return
 
     # Can only remove existing users and cannot remove self
     while remove_acc not in valid_accs or remove_acc == user_name:
         if remove_acc == user_name:
-            print("Cannot delete your own account. Please have another manager delete your account instead.")
-            remove_acc = str(input("Please enter the correct full name of another existing user whose account you would like to remove or type \"exit\": ")).upper()
+            print("\nCannot delete your own account. Please have another manager delete your account instead.")
+            remove_acc = str(input("\nPlease enter the correct full name of another existing user whose account you would like to remove or type \"exit\": ")).upper()
         elif remove_acc == "EXIT":
-            input("Delete account cancelled. Press enter to continue.")
+            input("\nDelete account cancelled. Press enter to continue.")
             reset_screen(True)
             return
         elif remove_acc not in valid_accs:
-            remove_acc = str(input("This user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
+            remove_acc = str(input("\nThis user does not exist. Please enter the correct full name of the existing user whose account you would like to remove or type \"exit\": ")).upper()
 
           
     # Deletes the user if changes have been saved
@@ -264,6 +267,6 @@ def delete_acc(user_name, valid_accs):
         return
     
     else:
-        input("Delete account cancelled. Press enter to continue.")
+        input("\nDelete account cancelled. Press enter to continue.")
         reset_screen(True)
         return

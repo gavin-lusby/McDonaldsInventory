@@ -6,6 +6,10 @@
 
 # Purpose: Create a comprehensive inventory software for McDonald's employees and managers to use
 
+#------------------------------------------------------------------------------------
+# GROUP PROJECT MANAGEMENT GOOGLE DRIVE FOLDER: https://drive.google.com/drive/folders/18KgQ-VdjpkSVuHXrb-W9Lw-e5VEdC70J
+# Contains: Kanban, group MVP + extras outline, meeting notes/recordings
+
 # GENERAL PROGRAMMING NOTES
 
 # --> We've noticed some bugs in the console output (presumably because some of the program was coded in PyCharm and some in Replit). The code itself should be fine; if you encounter weird bugs in the console print statements, refreshing Replit and then running the program again should fix the issue.

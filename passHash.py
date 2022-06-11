@@ -26,7 +26,7 @@ def acc_file_update(valid_accs):
     valid_accs_csv = []
   
     for user in valid_accs:
-        valid_accs_csv.append([user, valid_accs[user][0], valid_accs[user][1]])
+        valid_accs_csv.append([user, valid_accs[user][0], valid_accs[user][1],valid_accs[user][2]])
 
     valid_accs_csv.sort()
       

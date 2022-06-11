@@ -42,16 +42,16 @@ ACCOUNT SETTINGS
 
 Change password
   - no double check, or length/special character requirement
-  - can change anyones as manager
+  - can change anyones as manager. FINE
 
 New Account
   - prompts for save changes on every step. FINE
-  - loops
-  - doesnt let repeat users
-  - passwords and users can be empty
+  - loops. FINE
+  - doesnt let repeat users. GOOD
+  - passwords and users can be empty. FIXED 
 
 Deleting Account
-  - input checks work
+  - input checks work. GOOD
 
   works
 
