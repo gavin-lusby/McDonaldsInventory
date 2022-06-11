@@ -21,12 +21,13 @@ def start_menu():
     # (Line 22) Hashes all passwords (note: hash_file is a one-time run function; it's commented out below because we've already used it to hash the passwords)
     #hash_file(valid_accs)
 
+  
     user_name = None
     user_pass = ""
     user_pass_salted = ""
 
   
-    # (Lines 29-) Keep looping until user's full name is valid, or "exit" is chosen
+    # (Lines 32-64) Keep looping until user's full name is valid, or "exit" is chosen
     # Note: user_name is stored in all uppercase as case-sensitivity does not matter for full names and will make it easier for the user to correctly enter their full name
     while user_name not in valid_accs:
         reset_screen(False)
@@ -35,19 +36,25 @@ def start_menu():
         # Exits program if exit option chosen
         if user_name == "EXIT":
             exit_menu()
+          
         reset_screen(False)
-        if user_name is not None:  # Makes sure this code doesn't run the first time, only subsequent times
+      
+        # Ensures Lines 46-47 don't run the first time the user's name is inputted, only subsequent times
+        if user_name is not None:  
             print("Invalid name. Please try again.")
 
         reset_screen(False)
         print("Invalid name. Please try again.")
+
       
-    # Keeps looping until user's password is valid (equivalent to the stored hashed password) or "exit" is chosen
+    # Keeps looping until user's password is valid (valid if equivalent to the stored hashed password) or "exit" is chosen
     while hashlib.sha512(user_pass_salted.encode()).hexdigest() != valid_accs.get(user_name)[1]:
         # Exits program if exit option chosen
         if user_pass == "exit":
             exit_menu()
         reset_screen(False)
+
+        # Prints error message if user's password is empty
         if user_pass != "":  # Makes sure this code doesn't run the first time, only subsequent times
             print("Invalid password. Please try again.")
         user_pass = str(input("Please enter your password correctly (case-sensitive): "))
@@ -56,14 +63,17 @@ def start_menu():
         reset_screen(False)
         print("Invalid password. Please try again.")
 
+      
     # Clears the screen to prevent passwords from being seen by other users (privacy concern)
     reset_screen(False)
     print(menus["funclist"])
+
   
+    # Checks if the user is a manager or employee
     manager_status = manager_check(user_name, valid_accs)
 
-    # Calls on appropriate function for user's desired action
-
+  
+    # (Lines 77-112) Calls on appropriate function for user's desired action according to the menu
     while True:
         act = input("SELECT AN ACTION: ").strip()
         act_valid = True
@@ -96,19 +106,20 @@ def start_menu():
           
         reset_screen(False)
         print(menus["funclist"])
-        
+
+        # Prints error message if the user enters anything other than 1-8 or exit
         if not act_valid:
             print("Invalid action. Please try again.")
           
 
 # Only runs main if main is being run directly
 if __name__ == "__main__":
-    # Import libraries used
+    # Imports libraries used
     import hashlib
     import os
     import sys
   
-    # Import functions used
+    # Imports functions used
     from editInventoryCount import recalib_inventory, remove_from_inventory, add_to_inventory
     from checkStock import check_stock
     from accFuncts import manager_check, acc_menu
@@ -119,8 +130,8 @@ if __name__ == "__main__":
     import csvo
     from createNewItem import create_new_item, remove_item
 
-    # Importing from inventory.csv to create list of inventory units_by_product
-
+  
+    # Imports from inventory.csv to create units_by_product, a list of the inventory 
     with open(os.path.join(sys.path[0], "menus.txt"), 'r') as f:
         raw_menus = []
 
@@ -132,5 +143,6 @@ if __name__ == "__main__":
         for menu in f.read().splitlines():
             raw_menus.append(menu.replace('\\n', '\n'))
     menus = {"header": raw_menus[0], "funclist": raw_menus[1]}
+    
     # Run program
     start_menu()

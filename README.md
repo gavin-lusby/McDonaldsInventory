@@ -8,7 +8,7 @@
 
 #------------------------------------------------------------------------------------
 # GROUP PROJECT MANAGEMENT GOOGLE DRIVE FOLDER: https://drive.google.com/drive/folders/18KgQ-VdjpkSVuHXrb-W9Lw-e5VEdC70J
-# Contains: Kanban, group MVP + extras outline, meeting notes/recordings
+# Includes: Kanban, group MVP + extras outline, meeting notes/recordings
 
 # GENERAL PROGRAMMING NOTES
 

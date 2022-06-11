@@ -8,10 +8,9 @@
 
 
 import unittest
-import csvo
+from csvo import grp_to_con_grp()
 
 import random
-
 
 class TestGTCG(unittest.TestCase):
     def test_gtcg_predef(self):

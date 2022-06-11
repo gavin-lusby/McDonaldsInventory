@@ -1,4 +1,8 @@
 # accFuncts is short for Account Functions
+# There are two types of user accounts ("accs"): manager accounts and employee accounts. Both have different levels of access to certain functionalities within the program
+
+
+# Imports functions used
 from csvo import check_if_save
 from exitMenu import exit_menu
 from os import path as ospath
@@ -7,17 +11,14 @@ from resetScreen import reset_screen
 from sys import path as syspath
 
 
-# There are two types of user accounts ("accs"): manager accounts and employee accounts. Both have different levels of access to certain functionalities within the program
-
-
-# (Lines 14-20) Saves account settings menus from accMenus.txt to a list
+# (Lines 14-21) Saves account settings menus from accMenus.txt to a list
 acc_menus_lst = []
 
 with open(ospath.join(syspath[0], "accMenus.txt"), 'r') as f:
     reader = f.read().splitlines()
   
-for menuLine in list(reader):
-    acc_menus_lst.append(menuLine.replace('\\n', '\n'))
+for menu_line in list(reader):
+    acc_menus_lst.append(menu_line.replace('\\n', '\n'))
 
 
 def manager_check(user_name, valid_accs):
@@ -29,7 +30,7 @@ def manager_check(user_name, valid_accs):
 
 
 def print_menu(manager_status):
-      # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
+    # Saves menu items according to manager or employee status (ex. employees can only access employee actions, not manager-only actions)
     
     if manager_status == True:
         for line in range(len(acc_menus_lst)):
@@ -65,15 +66,17 @@ def acc_menu(manager_status, user_name, valid_accs):
         
       reset_screen(False)
       print_menu(manager_status)
-      
+
+      # Prints error message if user inputs something other than 1-3 or exit
       if not act_valid:
           print("\nInvalid action. Please try again.")
 
 
 def change_pass(manager_status, user_name, valid_accs):
     # This function allows account passwords to be changed
-    # Sidenote: We, the developers, unanimously agree that it's annoying when you forget your current password, then attempt to change your password and get hit with an error message telling you that your new password cannot be your current password (we're all a little forgetful sometimes). Thus, we did not include this annoying feature, we hope you can understand.
+    # Sidenote: We, the developers, unanimously agree that it's annoying when you forget your current password, then attempt to change your password and get hit with an error message telling you that your new password cannot be your current password (we're all a little forgetful sometimes 😔). Thus, we did not include this annoying feature. We hope you can understand our decision on this very important matter.
 
+  
     # Allows users to change their account (or another account's, in the case of managers making the password changes) password if they know their account's current password
     current_pass = str(input("Enter your account's current password: "))
     if current_pass.lower().strip() == "exit":
@@ -83,6 +86,7 @@ def change_pass(manager_status, user_name, valid_accs):
         
     user_salt = valid_accs[user_name][2]
 
+  
     # Users can only change an account's password if they know their own account's password (extra security measure in case an employee has accidentally left their account logged in after initially entering their password at the start of the program)
     while hash_pass(current_pass, user_salt) != valid_accs[user_name][1]:
         print("\nIncorrect current password.")
@@ -166,7 +170,7 @@ def create_acc(valid_accs):
               
                 if create_pass != None:
                     # Writes new user (name, status, and password to users.csv)
-                    valid_accs[new_name] = [create_status, create_pass,generate_salt()]
+                    valid_accs[new_name] = [create_status, create_pass, generate_salt()]
                     acc_file_update(valid_accs)
                   
                     print(f"{create_status} {new_name} saved.")
