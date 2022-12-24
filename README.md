@@ -1,6 +1,8 @@
 # McDonaldsInventory
 
-# Written by: Gavin, Isaac, Katie
+# Ownership was transferred from 1lusbygav --> gavin-lusby as the original account was soon to become deprecated. All commits from 1lusbygav or M333r are made by Gavin L (gavin-lusby)
+
+# Written by: Gavin L, Isaac, Katie
 
 # Date: May 12-June 10, 2022
 
