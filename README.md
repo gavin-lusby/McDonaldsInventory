@@ -1,3 +1,5 @@
+Purpose: Create a comprehensive inventory software for McDonald's employees and managers to use
+
 # McDonaldsInventory
 
 # Ownership was transferred from 1lusbygav --> gavin-lusby as the original account was soon to become deprecated. All commits from 1lusbygav or M333r are made by Gavin L (gavin-lusby)
